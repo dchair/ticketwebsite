@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 public class UserRegModel {
     private String username;
-    private String email;
+    private String password;
     private String mobile;
-    private String passwd;
+    private String email;
 }
