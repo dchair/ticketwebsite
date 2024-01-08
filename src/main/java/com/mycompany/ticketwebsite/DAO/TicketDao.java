@@ -18,6 +18,10 @@ public class TicketDao {
         return jdbcTemplate.update(sql2, ticket.getDateandlocation(), ticket.getSeat(), ticket.getTickettype(), ticket.getPayment(), ticket.getCollection());
     }
 
+    //查詢所有訂票資訊
+    public List<TicketInfoModel> getTicketInfoModelAll(){
+        return jdbcTemplate.query("SELECT * FROM ticketinfo", new TicketMapper());
+    }
     //查詢所有地點場次
     public List<TicketInfoModel> getTicketinfoByDateandlocation(String dateandlocation){
         return jdbcTemplate.query("SELECT * FROM ticketinfo where dateandlocation=?", new TicketMapper(), dateandlocation);
