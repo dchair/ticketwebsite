@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ticketinfoModel {
+public class TicketInfoModel {
     private int dateandlocation;
     //演唱會地點場次 1... 2... 3...
     private String seat;
