@@ -31,5 +31,4 @@ public class TicketDao {
         return jdbcTemplate.query("SELECT * FROM ticketinfo where seat=?", new TicketMapper(), seat);
     }
 
-
 }
