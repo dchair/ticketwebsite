@@ -24,22 +24,8 @@
     </div>
 </div>
 
-<div class="top-bar" id="mainNavigation">
-    <div class="top-bar-left">
-        <ul class="menu vertical medium-horizontal">
-            <li class="menu-text hide-for-small-only" ><a href="http://localhost:8080/index">SMOOTHTIX</a></li>
-        </ul>
-    </div>
-    <div class="top-bar-right">
-        <ul class="menu vertical medium-horizontal">
-            <li><a href="#">會員註冊</a></li>
-            <li><a href="#">會員登入</a></li>
-            <li><a href="#">檢視購物車</a></li>
-        </ul>
+<div th:insert="/fragments/fragments.html :: header"></div>
 
-    </div>
-</div>
-<!-- End Top Bar -->
 
 <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
     <ul class="orbit-container">
@@ -142,11 +128,8 @@
             <a  class="button small expanded hollow">敬請期待</a>
         </div>
     </div>
-
-
-
-    <footer class="callout secondary" style="text-align: left; background-color: #A9A9A9;">
-        <p style="font-size: 14px;">SMOOTHTIX網路娛樂股份有限公司 SMOOTHTIX©2024</p>
+    <footer>
+        <div th:insert="/fragments/fragments.html :: footer"></div>
     </footer>
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

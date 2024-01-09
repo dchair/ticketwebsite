@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div class="top-bar" id="mainNavigation" th:fragment="header">
+    <div class="top-bar-left">
+        <ul class="menu vertical medium-horizontal">
+            <li class="menu-text hide-for-small-only" ><a href="http://localhost:8080/index">SMOOTHTIX</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu vertical medium-horizontal">
+            <li><a href="#">會員註冊</a></li>
+            <li><a href="#">會員登入</a></li>
+            <li><a href="#">檢視購物車</a></li>
+        </ul>
+
+    </div>
+</div>
+
+<footer>
+<div class="callout secondary" style="text-align: left; background-color: #A9A9A9;" th:fragmnet="footer">
+    <p style="font-size: 14px;">SMOOTHTIX網路娛樂股份有限公司 SMOOTHTIX©2024</p>
+</div>
+</footer>
+
+</body>
+</html>
