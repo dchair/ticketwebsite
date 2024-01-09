@@ -15,6 +15,9 @@ public class TicketMapper implements RowMapper<TicketInfoModel> {
         t.setTickettype(rs.getShort("tickettype"));
         t.setPayment(rs.getShort("payment"));
         t.setCollection(rs.getShort("collection"));
+
+        t.setUserid(rs.getShort("userid"));
         return t;
     }
 }
+
