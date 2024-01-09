@@ -33,14 +33,11 @@ public class UserRegService {
         }else{
             return cnt;
         }
+
     }
     // 獨立寫成一個公用方法 讓確認帳號是否存在的功能可以分享 , 改密碼也需要檢查是有此帳號
     public boolean isUserExists(String username){
-        long count = userDao.isUserExists(username);
-        if(count>0){
-            return true;
-        }else{
-            return false;
+        return userDao.isUserExists(username) > 0;
         }
     }
-}
+
