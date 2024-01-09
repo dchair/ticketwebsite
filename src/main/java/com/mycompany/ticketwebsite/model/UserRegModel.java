@@ -13,4 +13,5 @@ public class UserRegModel {
     private String password;
     private String mobile;
     private String email;
+    private String confirmPassword; // 新增這個屬性
 }
