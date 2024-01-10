@@ -29,5 +29,7 @@ public class MainController {
     public String userReg () {
         return "user-reg";
     }
+    @GetMapping("/complete-reg")
+    public String completeReg() {return "complete-reg";}
 }
 
