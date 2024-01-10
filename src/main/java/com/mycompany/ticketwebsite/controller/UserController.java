@@ -60,7 +60,7 @@ public class UserController {
             return "user-reg"; // 返回註冊頁面
         } else {
             int result = userRegService.Registration(user);
-            return "redirect:/concert-page";// 假設註冊成功後轉向其他頁面
+            return "redirect:/index";// 註冊成功後轉回首頁
         }
     }
 

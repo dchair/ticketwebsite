@@ -25,9 +25,6 @@ public class MainController {
     public String completePurchase() {
         return "complete-purchase";
     }
-    @GetMapping("/user-reg")
-    public String userReg () {
-        return "user-reg";
-    }
+
 }
 
