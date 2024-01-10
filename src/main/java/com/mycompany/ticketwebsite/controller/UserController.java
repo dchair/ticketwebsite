@@ -51,18 +51,4 @@ public class UserController {
         model.addAttribute("mesg", msg);
         return "reg-result";
     }
-    @GetMapping("/user-reg")
-    public String register(UserRegModel user, Model model) {
-        // 檢查兩次密碼是否相符
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
-            model.addAttribute("error", "密碼不一致");
-            model.addAttribute("usermodel", user); // 保留用戶輸入的其他資訊
-            return "user-reg"; // 返回註冊頁面
-        } else {
-            int result = userRegService.Registration(user);
-            return "redirect:/index";// 註冊成功後轉回首頁
-        }
-    }
-
 }
-
