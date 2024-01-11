@@ -11,7 +11,7 @@
 
 <body>
 
-<div class="top-bar" id="mainNavigation" th:fragment="header">
+<div class="top-bar" id="mainNavigation" th:fragment="header" th:unless="${session.user}">
     <div class="top-bar-left">
         <ul class="menu vertical medium-horizontal">
             <li class="menu-text hide-for-small-only" ><a href="http://localhost:8080/">SMOOTHTIX</a></li>
@@ -23,7 +23,19 @@
             <li><a href="http://localhost:8080/login"><img class="group" src="/images/group.png">會員登入</a></li>
             <li><a href="http://localhost:8080/shopping-cart"><img class="shopping_cart" src="/images/shopping_cart.png">檢視購物車</a></li>
         </ul>
-
+    </div>
+</div>
+<div class="top-bar" id="mainNavigation" th:fragment="header" th:if="${session.user}">
+    <div class="top-bar-left">
+        <ul class="menu vertical medium-horizontal">
+            <li class="menu-text hide-for-small-only" ><a href="http://localhost:8080/">SMOOTHTIX</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu vertical medium-horizontal">
+            <li><a th:text="'Hello, '+${user.username}+'!'"></a><img class="group" src="/images/group.png"></li>
+            <li><a href="http://localhost:8080/shopping-cart"><img class="shopping_cart" src="/images/shopping_cart.png">檢視購物車</a></li>
+        </ul>
     </div>
 </div>
 
