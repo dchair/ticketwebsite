@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SMOOTHTIX 登入會員</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,10 +24,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <h1>SMOOTHTIX 登入會員</h1>
     <div class="main-agileinfo">
         <div class="agileits-top">
-            <form action="#" method="post">
-                <input class="text" type="text" name="Username" placeholder="Username" required="">
+            <form action="/login" method="post" th:action="@{/login}" th:object="${usermodel}">
+                <input class="text" type="text" th:field="*{username}" placeholder="帳號" required="">
 
-                <input class="text" type="password" name="password" placeholder="Password" required="">
+                <input class="text" type="password" th:field="*{password}" placeholder="密碼" required="">
 
                 <div class="wthree-text">
                     <label class="anim">
@@ -36,7 +36,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </label>
                     <div class="clear"> </div>
                 </div>
-                <input type="submit" value="SIGNUP">
+                <input type="submit" value="登入">
             </form>
             <p>還沒有會員嗎? <a href="http://localhost:8080/user-reg"> 立即註冊</a></p>
         </div>
@@ -61,3 +61,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!-- //main -->
 </body>
+</html>

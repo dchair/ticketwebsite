@@ -14,7 +14,4 @@ public class UserRegModel {
     private String mobile;
     private String email;
     private String confirmPassword; // 新增這個屬性
-    public String getPassword() {
-        return password != null ? password : "";
-    }
 }
