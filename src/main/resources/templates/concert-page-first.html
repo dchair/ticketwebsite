@@ -1,0 +1,131 @@
+<!doctype html>
+<html class="no-js" lang="en"xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMOOTHTIX | 搖滾巨星，來自英國的鬍子大叔!</title>
+    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  </head>
+  <body>
+
+
+  <div th:insert="/fragments/fragments.html :: header"></div>
+
+  <ul>
+    <li> </li>
+    <li> </li>
+    <li></li>
+  </ul>
+
+    <div class="row">
+      <div class="medium-4 columns" >
+        <img class="thumbnail(up)" src="/images/示意圖1.jpg">
+      </div>
+      <div class="medium-4 large-6 columns">
+        <h3>搖滾巨星，來自英國的鬍子大叔!</h3>
+        <p>準備好迎接一場音樂之夜，因為英國的鬍子大叔即將在舞台上掀起一場搖滾旋風！這位傳奇巨星以他無與倫比的音樂才華和搖滾魅力聞名於世，而這次的演唱會將是一場震撼心靈的現場饗宴。</p>
+
+        <p>他那振奮人心的吉他演奏和磁性的嗓音，絕對會讓你沉浸在音樂的海洋中。這不僅僅是一場演唱會，更是一場與音樂巨星近距離互動的難得機會。無論你是搖滾樂的愛好者還是正在尋找震撼感的音樂探索者，這場演唱會都將是你難以忘懷的音樂體驗。</p>
+
+        <p>立即購買票券，加入我們，與這位鬍子大叔一同燃燒搖滾之夜，讓音樂的激情在心中迸發！</p>
+
+        <label>場次/地點
+        <select>
+          <option value="one">1/13台北兩廳院</option>
+          <option value="two">1/13台中歌劇院</option>
+          <option value="three">1/13高雄衛武營</option>
+          <option value="four">1/20台北兩廳院</option>
+          <option value="five">1/20台中歌劇院</option>
+          <option value="six">1/20高雄衛武營</option>
+        </select>
+        </label>
+
+        <label>票種
+          <select>
+            <option value="first">敬老票</option>
+            <option value="second">學生票</option>
+            <option value="third">全票</option>
+
+          </select>
+        </label>
+
+        <div class="row">
+          <div class="small-3 columns">
+            <label for="middle-label" class="middle">數量</label>
+          </div>
+          <div class="small-9 columns">
+            <input type="text" id="middle-label" placeholder="請輸入數量">
+          </div>
+        </div>
+
+        <a href="#" class="button large expanded">加入購物車</a>
+
+        <div class="small secondary expanded button-group">
+
+          </div>
+        </div>
+    </div>
+  <ul>
+    <li> </li>
+    <li> </li>
+  </ul>
+  <h3>其他更多選擇~</h3>
+  <ul>
+    <li> </li>
+  </ul>
+  <a href="http://localhost:8080/concert-page/second">
+    <div class="media-object stack-for-small">
+      <div class="media-object-section">
+        <img class="thumbnail" src="/images/示意圖2.jpg">
+      </div>
+      <div class="media-object-section">
+        <h5>抒情情歌王子，叼菸的猴子~</h5>
+        <p>這隻叼著煙的猴子，不僅僅是一位歌手，更是一位情感的詩人。他的音樂打破了傳統的框架，散發出迷人的魅力，讓人無法自拔。在他的音樂中，你會找到屬於自己的共鳴，彷彿每一個音符都是他用心吟唱的情感。</p>
+      </div>
+    </div>
+  </a>
+  <a href="http://localhost:8080/concert-page/third">
+    <div class="media-object stack-for-small">
+      <div class="media-object-section">
+        <img class="thumbnail" src="/images/示意圖3.jpg">
+      </div>
+      <div class="media-object-section">
+        <h5>鄉村吉他手，鄉村抒情小調~</h5>
+        <p>沉浸在鄉村吉他手的音樂世界中，這位才子以他手中的吉他，演奏著鄉村抒情小調，帶領聽眾走進一片充滿自然、樸實的音樂田園。他的音樂彷彿是大地的呼吸，每一個音符都像是風吹過麥浪的聲音，散發著濃濃的鄉愁。</p>
+      </div>
+    </div>
+  </a>
+
+
+
+
+    <footer>
+      <div th:insert="/fragments/fragments.html :: footer"></div>
+    </footer>
+
+  <style>
+    p {
+      letter-spacing: 2px;
+    }
+    h3{
+      letter-spacing: 1px;
+    }
+    img.thumbnail {
+      max-width: 200px; /* 設定最大寬度為200像素 */
+      max-height: 200px; /* 設定最大高度為200像素 */
+      width: auto; /* 讓圖片按照比例縮放 */
+      height: auto; /* 讓圖片按照比例縮放 */
+    }
+  </style>
+
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
+
+
+
