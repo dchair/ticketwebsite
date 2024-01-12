@@ -1,4 +1,3 @@
-
 /*--
 Author: Colorlib
 Author URL: https://colorlib.com
@@ -40,9 +39,7 @@ table {
 }
 
 /*-- start editing from here --*/
-a {
-    text-decoration: none;
-}
+
 
 .txt-rt {
     text-align: right;
@@ -124,11 +121,7 @@ body {
 h1 {
     font-size: 3em;
     text-align: center;
-    color: #fff;
-    font-weight: 100;
-    text-transform: capitalize;
-    letter-spacing: 4px;
-    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
 }
 
 /*-- main --*/
@@ -147,29 +140,8 @@ h1 {
     padding: 3em;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
-    font-size: 0.9em;
-    color: #fff;
-    font-weight: 100;
-    width: 94.5%;
-    display: block;
-    border: none;
-    padding: 0.8em;
-    border: solid 1px rgba(255, 255, 255, 0.37);
-    -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-    transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #fff 4%);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
-    background-position: -800px 0;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-}
 
-input.email, input.text.w3lpass {
-    margin: 2em 0;
-}
+
 
 .text:focus, .text:valid {
     box-shadow: none;
@@ -207,39 +179,16 @@ input.email, input.text.w3lpass {
     color: #fff;
 }
 
-input[type="submit"] {
-    font-size: .9em;
-    color: #fff;
-    background: #33D7FF;
-    outline: none;
-    border: 1px solid #33D7FF;
-    cursor: pointer;
-    padding: 0.9em;
-    -webkit-appearance: none;
-    width: 100%;
-    margin: 2em 0;
-    letter-spacing: 4px;
-}
-
-input[type="submit"]:hover {
-    -webkit-transition: .5s all;
-    -moz-transition: .5s all;
-    -o-transition: .5s all;
-    -ms-transition: .5s all;
-    transition: .5s all;
-    background: #33D7FF;
-}
-
-.agileits-top p {
-    font-size: 1em;
-    color: #fff;
-    text-align: center;
-    letter-spacing: 1px;
-    font-weight: 300;
-}
+    .agileits-top p {
+        font-size: 1em;
+        color: #ffffff;
+        text-align: center;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
 
 .agileits-top p a {
-    color: #fff;
+    color: #000000;
     -webkit-transition: .5s all;
     -moz-transition: .5s all;
     transition: .5s all;
@@ -260,72 +209,6 @@ input[type="submit"]:hover {
     position: relative;
 }
 
-input.checkbox {
-    background: #33D7FF;
-    cursor: pointer;
-    width: 1.2em;
-    height: 1.2em;
-}
-
-input.checkbox:before {
-    content: "";
-    position: absolute;
-    width: 1.2em;
-    height: 1.2em;
-    background: inherit;
-    cursor: pointer;
-}
-
-input.checkbox:after {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: 0;
-    z-index: 1;
-    width: 1.2em;
-    height: 1.2em;
-    border: 1px solid #fff;
-    -webkit-transition: .4s ease-in-out;
-    -moz-transition: .4s ease-in-out;
-    -o-transition: .4s ease-in-out;
-    transition: .4s ease-in-out;
-}
-
-input.checkbox:checked:after {
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    height: .5rem;
-    border-color: #fff;
-    border-top-color: transparent;
-    border-right-color: transparent;
-}
-
-.anim input.checkbox:checked:after {
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    height: .5rem;
-    border-color: transparent;
-    border-right-color: transparent;
-    animation: .4s rippling .4s ease;
-    animation-fill-mode: forwards;
-}
-
-@keyframes rippling {
-    50% {
-        border-left-color: #fff;
-    }
-
-    100% {
-        border-bottom-color: #fff;
-        border-left-color: #fff;
-    }
-}
 
 /*-- //checkbox --*/
 /*-- copyright --*/
@@ -760,5 +643,30 @@ input.checkbox:checked:after {
 
     .main-w3layouts {
         padding: 1em 0 0;
+    }
+    .colorlibcopy-agile {
+        margin: 2em 0 1em;
+        text-align: center;
+    }
+
+    .colorlibcopy-agile p {
+        font-size: .9em;
+        color: #fff;
+        line-height: 1.8em;
+        letter-spacing: 1px;
+        font-weight: 100;
+    }
+
+    .colorlibcopy-agile p a {
+        color: #fff;
+        transition: 0.5s all;
+        -webkit-transition: 0.5s all;
+        -moz-transition: 0.5s all;
+        -o-transition: 0.5s all;
+        -ms-transition: 0.5s all;
+    }
+
+    .colorlibcopy-agile p a:hover {
+        color: #000;
     }
 }

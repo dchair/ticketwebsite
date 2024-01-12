@@ -11,7 +11,7 @@ public class ShoppingCartService {
 
     private final ShoppingCart shoppingCart = new ShoppingCart();
 
-    public void addToCart(ShoppingCart cart, int dateandlocation, int quantity) {
+    public void addToCart(ShoppingCart cart, String productId, int quantity) {
         // 實現加入購物車的邏輯
         // 更新 ShoppingCart 中的 cartItems
     }
@@ -21,9 +21,8 @@ public class ShoppingCartService {
         // 更新 ShoppingCart 中的 cartItems
     }
 
-    public void checkout(ShoppingCart cart) {
-        // 實現結帳的邏輯
-        // 清空 ShoppingCart 中的 cartItems
-    }
 
+    public void checkout(ShoppingCart cart) {
+
+    }
 }

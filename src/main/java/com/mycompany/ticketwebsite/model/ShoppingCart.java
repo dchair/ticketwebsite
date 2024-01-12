@@ -14,4 +14,6 @@ import java.util.List;
 @Setter
 public class ShoppingCart {
     private List<CartItem> cartItems = new ArrayList<>();
+
 }
+
