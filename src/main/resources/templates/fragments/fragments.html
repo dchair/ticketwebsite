@@ -10,19 +10,40 @@
 </head>
 
 <body>
-<div class="top-bar" id="mainNavigation" th:fragment="header">
+
+<div class="top-bar" id="mainNavigation" th:fragment="header" th:unless="${session.user}">
     <div class="top-bar-left">
         <ul class="menu vertical medium-horizontal">
-            <li class="menu-text hide-for-small-only" ><a href="http://localhost:8080/index">SMOOTHTIX</a></li>
+            <li class="menu-text hide-for-small-only" ><a href="http://localhost:8080/">SMOOTHTIX</a></li>
         </ul>
     </div>
     <div class="top-bar-right">
         <ul class="menu vertical medium-horizontal">
-            <li><a href="#">會員註冊</a></li>
-            <li><a href="#">會員登入</a></li>
-            <li><a href="#">檢視購物車</a></li>
+            <li><a href="http://localhost:8080/user-reg"><img class="person_add" src="/images/person_add.png">會員註冊</a></li>
+            <li><a href="http://localhost:8080/login"><img class="group" src="/images/group.png">會員登入</a></li>
+            <li><a href="http://localhost:8080/shopping-cart"><img class="shopping_cart" src="/images/shopping_cart.png">檢視購物車</a></li>
         </ul>
-
+    </div>
+</div>
+<div class="top-bar" id="mainNavigation" th:fragment="header" th:if="${session.user}">
+    <div class="top-bar-left">
+        <ul class="menu vertical medium-horizontal">
+            <li class="menu-text hide-for-small-only" ><a href="http://localhost:8080/">SMOOTHTIX</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu vertical medium-horizontal">
+            <li>
+                <a>
+                    <img class="group" src="/images/group.png">
+                    <span th:text="'Hello, ' + ${user.username} + '!'"></span>
+                </a>
+            </li>
+            <li><a href="http://localhost:8080/shopping-cart"><img class="shopping_cart" src="/images/shopping_cart.png">檢視購物車</a></li>
+            <li>
+                <a href="/logout">會員登出</a>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -31,6 +52,8 @@
     <p style="font-size: 14px;">SMOOTHTIX網路娛樂股份有限公司 SMOOTHTIX©2024</p>
 </div>
 </footer>
+
+
 
 </body>
 </html>

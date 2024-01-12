@@ -5,12 +5,13 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SMOOTHTIX 登入會員</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom Theme files -->
     <link href="/CSS/user-reg.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //Custom Theme files -->
@@ -24,10 +25,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <h1>SMOOTHTIX 登入會員</h1>
     <div class="main-agileinfo">
         <div class="agileits-top">
-            <form action="#" method="post">
-                <input class="text" type="text" name="Username" placeholder="Username" required="">
+            <form id="loginForm" action="/login" method="post" th:action="@{/login}" th:object="${usermodel}">
+                <input class="text" type="text" th:field="*{username}" placeholder="帳號" required="">
 
-                <input class="text" type="password" name="password" placeholder="Password" required="">
+                <input class="text" type="password" th:field="*{password}" placeholder="密碼" required="">
+
+
 
                 <div class="wthree-text">
                     <label class="anim">
@@ -36,9 +39,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </label>
                     <div class="clear"> </div>
                 </div>
-                <input type="submit" value="SIGNUP">
+                <input type="submit" value="登入">
             </form>
-            <p>還沒有會員嗎? <a href="http://localhost:8080/user-reg"> 立即註冊</a></p>
+            <p>還沒有會員嗎? <a href="http://localhost:8080/user-regform"> 立即註冊</a></p>
+            <p th:if="${param.error}" style="color: red;">帳號或密碼錯誤，請重新輸入。</p>
         </div>
     </div>
     <!-- copyright -->
@@ -59,5 +63,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <li></li>
     </ul>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#loginForm').submit(function (event) {
+            console.log('Form submitted!');  // 用於調試，確保這條消息顯示在控制台
+            event.preventDefault(); // 阻止表單默認提交行為
+
+            // 使用 AJAX 提交表單
+            $.ajax({
+                type: 'POST', // 使用表單的提交方式
+                url: $(this).attr('action'),
+                data: $(this).serialize(), // 使用 serialize() 將表單數據序列化
+                success: function (data) {
+                    console.log('Ajax success!', data);  // 用於調試，確保這條消息顯示在控制台
+                    // 處理後端返回的數據，例如顯示成功消息、轉向首頁等
+
+                    // 示例：如果登錄成功，則轉向首頁
+                    if (data.success) {
+                        window.location.href = "/";  // 設置為首頁的 URL
+                    }else {
+                        // 如果登錄失敗，顯示錯誤消息
+                        $('p').text("帳號或密碼錯誤，請重新輸入。").css("color", "red");
+                    }
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                    // 處理錯誤，例如顯示錯誤消息
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
 <!-- //main -->
 </body>
+
