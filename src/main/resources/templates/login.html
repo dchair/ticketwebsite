@@ -1,11 +1,15 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SMOOTHTIX 登入會員</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="/CSS/user-reg.css" rel="stylesheet" type="text/css" media="all" />
 
+    <!-- Custom Theme files -->
+    <link href="/CSS/user-reg.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //Custom Theme files -->
+    <!-- web font -->
     <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
     <!-- //web font -->
 </head>
@@ -19,6 +23,7 @@
                 <input class="text" type="text" th:field="*{username}" placeholder="帳號" required="">
 
                 <input class="text" type="password" th:field="*{password}" placeholder="密碼" required="">
+
                 <div class="wthree-text">
                     <label class="anim">
 
@@ -31,7 +36,9 @@
             <p>還沒有會員嗎? <a href="http://localhost:8080/user-regform"> 立即註冊</a></p>
         </div>
     </div>
-        <h6 th:if="${param.error}" style="color: red;">帳號或密碼錯誤，請重新輸入。</h6>
+    <h6 th:if="${param.error}" style="color: red;">帳號或密碼錯誤，請重新輸入。</h6>
+    <!-- copyright -->
+
     <!-- //copyright -->
     <ul class="colorlib-bubbles">
         <li></li>
@@ -60,6 +67,7 @@
                 success: function (data) {
                     console.log('Ajax success!', data);  // 用於調試，確保這條消息顯示在控制台
                     // 處理後端返回的數據，例如顯示成功消息、轉向首頁等
+
                     // 示例：如果登錄成功，則轉向首頁
                     if (data.success) {
                         window.location.href = "/";  // 設置為首頁的 URL

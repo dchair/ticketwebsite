@@ -15,7 +15,7 @@ public class UserDao {
     //新增會員資料
     public int saveUser(UserRegModel user){
         String sql1="INSERT INTO USER(username, password, mobile, `e-mail`) values (?,?,?,?)";
-                return jdbcTemplate.update(sql1,user.getUsername(),user.getPassword(),user.getMobile(),user.getEmail());
+        return jdbcTemplate.update(sql1,user.getUsername(),user.getPassword(),user.getMobile(),user.getEmail());
     }
     //查詢密碼
     public UserRegModel findByUsername(String username){

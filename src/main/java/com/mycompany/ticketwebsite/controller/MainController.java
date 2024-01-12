@@ -69,11 +69,16 @@ public class MainController {
         // 返回首页视图
         return "shopping-cart";
     }
+
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "index";
     }
-    @GetMapping("/complete-reg")
-    public String completeReg() {return "complete-reg";}
 
+    @GetMapping("/complete-reg")
+    public String completeReg() {
+        return "complete-reg";
+    }
+
+}

@@ -23,7 +23,7 @@ public class UserController {
         model.addAttribute("usermodel",userModel);
         return "user-reg";
     }
-    @PostMapping("/user-regform2")
+    @PostMapping("/complete-reg")
     public String UserRegProcess2(@ModelAttribute UserRegModel usermodel, Model model) {
         String msg = null;
         // 使用者送 request 進來後 回傳 註冊表單名稱
@@ -49,6 +49,6 @@ public class UserController {
         //結果通知
         model.addAttribute("user", usermodel.getUsername());
         model.addAttribute("mesg", msg);
-        return "reg-result";
+        return "complete-reg";
     }
 }
