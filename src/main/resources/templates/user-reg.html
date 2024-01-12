@@ -1,13 +1,7 @@
-<!--
-Author: Colorlib
-Author URL: https://colorlib.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Creative Colorlib SignUp Form</title>
+    <title>Smoothtix 會員註冊</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -21,29 +15,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
 <!-- main -->
 <div class="main-w3layouts wrapper">
-    <h1>Creative SignUp Form</h1>
+    <h1>Smoothtix 會員註冊</h1>
     <div class="main-agileinfo">
         <div class="agileits-top">
-            <form action="#" method="post">
-                <input class="text" type="text" name="Username" placeholder="Username" required="">
-                <input class="text email" type="email" name="email" placeholder="Email" required="">
-                <input class="text" type="password" name="password" placeholder="Password" required="">
-                <input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
+            <form method="post" th:object="${usermodel}" action="/user-regform2" onsubmit="return validateForm()">
+                <input class="text" type="text" th:field="*{username}" name="Username" placeholder="帳號" required="">
+                <input class="text" type="password" th:field="*{password}" name="password" placeholder="密碼" required="">
+                <input class="text" type="text" th:field="*{mobile}" placeholder="電話" required="">
+                <input class="text" type="email" th:field="*{email}" placeholder="電子郵件" required="">
+                <input class="text w3lpass" type="password" th:field="*{confirmPassword}" placeholder="請再輸入一次密碼" required="">
                 <div class="wthree-text">
                     <label class="anim">
                         <input type="checkbox" class="checkbox" required="">
-                        <span>I Agree To The Terms & Conditions</span>
+                        <span><a href="#">勾選即表示您同意接受服務條款而且已閱讀隱私權保護政策</a></span>
                     </label>
                     <div class="clear"> </div>
                 </div>
-                <input type="submit" value="SIGNUP">
+                <input type="submit" value="註冊">
             </form>
-            <p>Don't have an Account? <a href="#"> Login Now!</a></p>
+            <script>
+                function validateForm() {
+                    var password = document.getElementById("password").value;
+                    var confirmPassword = document.getElementById("confirmPassword").value;
+
+                    if (password !== confirmPassword) {
+                        alert("密碼不一致, 請重新輸入密碼");
+                        return false;
+                    }
+
+                    return true;
+                }
+            </script>
         </div>
     </div>
     <!-- copyright -->
     <div class="colorlibcopy-agile">
-        <p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
+        <p style="font-size: 14px;">SMOOTHTIX網路娛樂股份有限公司 SMOOTHTIX©2024</p>
     </div>
     <!-- //copyright -->
     <ul class="colorlib-bubbles">

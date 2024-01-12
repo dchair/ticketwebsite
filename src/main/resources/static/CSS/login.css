@@ -1,3 +1,4 @@
+
 /*--
 Author: Colorlib
 Author URL: https://colorlib.com
@@ -329,7 +330,7 @@ input.checkbox:checked:after {
 /*-- //checkbox --*/
 /*-- copyright --*/
 .colorlibcopy-agile {
-    margin: 2em 0 3em;
+    margin: 2em 0 1em;
     text-align: center;
 }
 
