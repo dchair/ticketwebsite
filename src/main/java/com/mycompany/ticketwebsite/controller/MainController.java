@@ -74,5 +74,5 @@ public class MainController {
         session.removeAttribute("user");
         return "index";
     }
-
-}
+    @GetMapping("/complete-reg")
+    public String completeReg() {return "complete-reg";}
