@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="#">
 </head>
 <body>
+
+<h1>Shopping Cart</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through cart items -->
+    <tr th:each="item : ${cartItems}">
+        <td th:text="${item.productName}"></td>
+        <td th:text="${item.price}"></td>
+        <td>
+            <input type="number" th:value="${item.quantity}" min="1">
+        </td>
+        <td th:text="${item.total}"></td>
+        <td>
+            <button th:onclick="'removeFromCart(\'' + ${item.productId} + '\')'">Remove</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p>Total: <span th:text="${total}"></span></p>
+
+<button onclick="checkout()">Checkout</button>
+
+<script>
+    function removeFromCart(productId) {
+        // Implement remove from cart logic with productId
+    }
+
+    function checkout() {
+        // Implement checkout logic
+    }
+</script>
 
 </body>
 </html>
