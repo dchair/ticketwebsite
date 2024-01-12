@@ -1,13 +1,14 @@
 package com.mycompany.ticketwebsite.service;
 
+import com.mycompany.ticketwebsite.model.CartItem;
 import com.mycompany.ticketwebsite.model.ShoppingCart;
-import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 @Getter
 @Service
 public class ShoppingCartService {
+
     private final ShoppingCart shoppingCart = new ShoppingCart();
 
     public void addToCart(ShoppingCart cart, String productId, int quantity) {
@@ -20,11 +21,8 @@ public class ShoppingCartService {
         // 更新 ShoppingCart 中的 cartItems
     }
 
-    public void checkout(HttpSession session) {
-        // 實現結帳的邏輯
-        // 清空 ShoppingCart 中的 cartItems
-    }
 
     public void checkout(ShoppingCart cart) {
+
     }
 }

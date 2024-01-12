@@ -76,3 +76,4 @@ public class MainController {
     }
     @GetMapping("/complete-reg")
     public String completeReg() {return "complete-reg";}
+

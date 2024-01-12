@@ -15,5 +15,5 @@ public class CartItem {
     private double price;
     private int quantity;
 
-    // getter, setter, and constructor
 }
+

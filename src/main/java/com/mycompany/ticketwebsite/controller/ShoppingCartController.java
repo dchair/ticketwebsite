@@ -24,6 +24,7 @@ public class ShoppingCartController {
             shoppingCartService.checkout(cart);
             session.removeAttribute("cart");
         }
+
         return "complete-purchase"; // 這個方法會檢查 Session 中的購物車，並調用@service完成結帳操作。
     }
 
