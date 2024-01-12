@@ -1,9 +1,4 @@
-<!--
-Author: Colorlib
-Author URL: https://colorlib.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -40,13 +35,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <input type="submit" value="登入">
             </form>
             <p>還沒有會員嗎? <a href="http://localhost:8080/user-regform"> 立即註冊</a></p>
-            <p th:if="${param.error}" style="color: red;">帳號或密碼錯誤，請重新輸入。</p>
         </div>
     </div>
+        <h6 th:if="${param.error}" style="color: red;">帳號或密碼錯誤，請重新輸入。</h6>
     <!-- copyright -->
-    <div class="colorlibcopy-agile">
-        <p style="font-size: 14px;">SMOOTHTIX網路娛樂股份有限公司 SMOOTHTIX©2024</p>
-    </div>
+
     <!-- //copyright -->
     <ul class="colorlib-bubbles">
         <li></li>
@@ -82,7 +75,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     }else {
                         // 如果登錄失敗，顯示錯誤消息
                         $('p').text("帳號或密碼錯誤，請重新輸入。").css("color", "red");
-                        }
+                    }
                 },
                 error: function (error) {
                     console.error('Error:', error);
@@ -93,4 +86,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     });
 </script>
 </body>
+<div class="colorlibcopy-agile">
+    <p style="font-size: 14px;">SMOOTHTIX網路娛樂股份有限公司 SMOOTHTIX©2024</p>
+</div>
 </html>
