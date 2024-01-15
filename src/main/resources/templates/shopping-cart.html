@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" xmlns="http://www.thymeleaf.org">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -26,9 +26,9 @@
             <div class="table-responsive">
                 <table class="table table-bordered m-0">
                     <thead>
-                    <tr>
+                    <tr th:each="item : ${cartItems}">
                         <!-- Set columns width -->
-                        <th class="text-center py-3 px-4" style="min-width: 400px;">產品名稱 &amp; 產品明細</th>
+                        <th class="text-center py-3 px-4" style="min-width: 400px" th:text="${item.productName}">產品名稱 &amp; 產品明細</th>
                         <th class="text-right py-3 px-4" style="width: 100px;">價格</th>
                         <th class="text-center py-3 px-4" style="width: 120px;">數量</th>
                         <th class="text-right py-3 px-4" style="width: 100px;">加總價格</th>

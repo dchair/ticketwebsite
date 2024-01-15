@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ShoppingCart {
-    private List<CartItem> cartItems = new ArrayList<>();
+    private List<TicketInfoModel> ticketInfoModels = new ArrayList<>();
 
 }
 

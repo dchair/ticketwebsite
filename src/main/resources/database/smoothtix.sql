@@ -37,16 +37,28 @@ CREATE TABLE IF NOT EXISTS `2dateandlocation` (
   `dateandlocation` int(11) NOT NULL AUTO_INCREMENT,
   `ddescription` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`dateandlocation`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在傾印表格  smoothtix.2dateandlocation 的資料：~6 rows (近似值)
+-- 正在傾印表格  smoothtix.2dateandlocation 的資料：~18 rows (近似值)
 INSERT INTO `2dateandlocation` (`dateandlocation`, `ddescription`) VALUES
-	(1, '1/13台北兩廳院'),
-	(2, '1/13台中歌劇院'),
-	(3, '1/13高雄衛武營'),
-	(4, '1/20台北兩廳院'),
-	(5, '1/20台中歌劇院'),
-	(6, '1/20高雄衛武營');
+	(1, '1/13台北兩廳院(1)\r\n'),
+	(2, '1/13台中歌劇院(1)'),
+	(3, '1/13高雄衛武營(1)'),
+	(4, '1/20台北兩廳院(1)'),
+	(5, '1/20台中歌劇院(1)'),
+	(6, '1/20高雄衛武營(1)'),
+	(7, '1/13台北兩廳院(2)'),
+	(8, '1/13台中歌劇院(2)'),
+	(9, '1/13高雄衛武營(2)'),
+	(10, '1/20台北兩廳院(2)'),
+	(11, '1/20台中歌劇院(2)'),
+	(12, '1/20高雄衛武營(2)'),
+	(13, '1/13台北兩廳院(3)\r\n'),
+	(14, '1/13台中歌劇院(3)'),
+	(15, '1/13高雄衛武營(3)'),
+	(16, '1/20台北兩廳院(3)'),
+	(17, '1/20台中歌劇院(3)'),
+	(18, '1/20高雄衛武營(3)');
 
 -- 傾印  資料表 smoothtix.2payment 結構
 CREATE TABLE IF NOT EXISTS `2payment` (
@@ -55,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `2payment` (
   PRIMARY KEY (`payment`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在傾印表格  smoothtix.2payment 的資料：~3 rows (近似值)
+-- 正在傾印表格  smoothtix.2payment 的資料：~2 rows (近似值)
 INSERT INTO `2payment` (`payment`, `pdescription`) VALUES
 	(1, '信用卡'),
 	(2, '超商付款'),
@@ -68,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `2tickettype` (
   PRIMARY KEY (`tickettype`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在傾印表格  smoothtix.2tickettype 的資料：~3 rows (近似值)
+-- 正在傾印表格  smoothtix.2tickettype 的資料：~2 rows (近似值)
 INSERT INTO `2tickettype` (`tickettype`, `tdecription`) VALUES
 	(1, '敬老票'),
 	(2, '學生票'),
@@ -94,11 +106,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(15) NOT NULL DEFAULT '0',
   `password` varchar(20) NOT NULL DEFAULT '0',
   `mobile` varchar(15) DEFAULT NULL,
-  `e-mail` varchar(20) DEFAULT NULL,
+  `e-mail` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`uid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在傾印表格  smoothtix.user 的資料：~0 rows (近似值)
+-- 正在傾印表格  smoothtix.user 的資料：~4 rows (近似值)
+INSERT INTO `user` (`uid`, `username`, `password`, `mobile`, `e-mail`) VALUES
+	(1, 'user01', '123', '09-12-123-123', 'a0912345678@gmail.com'),
+	(2, 'user02', '456', '09-123-12-123', 'a1264561436@gamil.com'),
+	(3, 'user03', '123', '09-12-123-123', 'a0912345678@gmail.com'),
+	(4, 'user04', '123', '09-12-123-123', 'a0912345678@gmail.com');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
