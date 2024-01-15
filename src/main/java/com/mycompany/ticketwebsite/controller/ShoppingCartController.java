@@ -42,14 +42,24 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(@RequestParam int dateandlocation, @RequestParam int quantity, HttpSession session) {
+    public String addToCart(@RequestParam int dateandlocation,
+                            @RequestParam String seat,
+                            @RequestParam int tickettype,
+                            @RequestParam int payment,
+                            @RequestParam int collection,
+                            @RequestParam int quantity,
+                            @RequestParam int price,
+                            HttpSession session) {
+        // 在此處創建 TicketInfoModel 物件，然後加入購物車
+        TicketInfoModel ticketInfoModel = new TicketInfoModel(dateandlocation, seat, tickettype, payment, collection, 0, quantity, price);
+
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart == null) {
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
         }
 
-        // 在此處根據 productId 查詢相應的 TicketInfoModel 物件
+        // 在此處根據 dateandlocation 查詢相應的 TicketInfoModel 物件
         TicketInfoModel ticketInfo = shoppingCartService.getTicketInfoByDateandlocation(dateandlocation);
 
         // 處理找不到商品的情況，這裡假設 getTicketInfoByProductId 方法會返回 null

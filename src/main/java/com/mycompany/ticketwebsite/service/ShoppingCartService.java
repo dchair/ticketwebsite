@@ -1,8 +1,10 @@
 package com.mycompany.ticketwebsite.service;
 
+import com.mycompany.ticketwebsite.DAO.TicketDao;
 import com.mycompany.ticketwebsite.model.ShoppingCart;
 import com.mycompany.ticketwebsite.model.TicketInfoModel;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -31,16 +33,24 @@ public class ShoppingCartService {
                 map.put(i, productNames.get(i - 1));
             }
         }
-        // 添加其他 productId 到商品名稱的映射
         return map;
+    }
+    @Autowired
+    private TicketDao ticketDao;
+
+    public TicketInfoModel getTicketInfoByDateandlocation(int dateandlocation) {
+        List<TicketInfoModel> ticketList = ticketDao.getTicketinfoByDateandlocation(Integer.toString(dateandlocation));
+
+        // 假設您希望返回唯一的TicketInfoModel，您可以進行進一步的邏輯處理
+        // 這裡的示例是返回列表的第一個元素，您可能需要根據實際情況進行處理
+        return ticketList.isEmpty() ? null : ticketList.get(0);
     }
 
 
     public void addToCart(ShoppingCart cart, TicketInfoModel ticketInfo, int quantity) {
         // 實現加入購物車的邏輯
-        // 更新 ShoppingCart 中的 cartItems
 
-        int dateandlocation = ticketInfo.getDateandlocation(); // 假設使用 dateandlocation 作為商品 ID
+        int dateandlocation = ticketInfo.getDateandlocation(); // 使用 dateandlocation 作為商品 ID
         String productName = dateandlocationToProductName.get(dateandlocation); // 根據商品 ID 獲取商品名稱
 
         // 檢查購物車中是否已存在相同商品，如果存在，則增加數量而不是新增
@@ -63,9 +73,8 @@ public class ShoppingCartService {
 
     public void removeFromCart(ShoppingCart cart, int dateandlocation) {
         // 實現從購物車中移除商品的邏輯
-        // 更新 ShoppingCart 中的 cartItems
 
-        // 找到相應的 CartItem
+        // 找到相應的 ticketinfomodels
         TicketInfoModel itemToRemove = null;
         for (TicketInfoModel item : cart.getTicketInfoModels()) {
             if (item.getDateandlocation() == dateandlocation) {
@@ -74,7 +83,7 @@ public class ShoppingCartService {
             }
         }
 
-        // 移除相應的 CartItem
+        // 移除相應的 ticketinfomodels
         if (itemToRemove != null) {
             cart.getTicketInfoModels().remove(itemToRemove);
         }
@@ -83,7 +92,7 @@ public class ShoppingCartService {
 
     public void checkout(ShoppingCart cart) {
         // 實現結帳的邏輯
-        // 清空 ShoppingCart 中的 cartItems
+        // 清空 ShoppingCart 中的 ticketinfomodels
         cart.getTicketInfoModels().clear();
 
     }
