@@ -18,7 +18,7 @@
     <h1>Smoothtix 會員註冊</h1>
     <div class="main-agileinfo">
         <div class="agileits-top">
-            <form method="post" th:object="${usermodel}" action="/user-regform2" onsubmit="return validateForm()">
+            <form method="post" th:object="${usermodel}" action="/complete-reg" onsubmit="return validateForm()">
                 <input class="text" type="text" th:field="*{username}" name="Username" placeholder="帳號" required="">
                 <input class="text" type="password" th:field="*{password}" name="password" placeholder="密碼" required="">
                 <input class="text" type="text" th:field="*{mobile}" placeholder="電話" required="">
