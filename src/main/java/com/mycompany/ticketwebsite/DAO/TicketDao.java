@@ -15,8 +15,8 @@ public class TicketDao {
 
     //新增一筆訂票資料
     public int saveTicket(TicketInfoModel ticket) {
-        String sql2 = "INSERT INTO ticketinfo(dateandlocation, seat, tickettype, payment, collection, userid) values(?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql2, ticket.getDateandlocation(), ticket.getSeat(), ticket.getTickettype(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
+        String sql2 = "INSERT INTO ticketinfo(dateandlocation, tickettype, payment, collection, userid) values(?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql2, ticket.getDateandlocation(), ticket.getTickettype(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
     }
 
     //查詢所有訂票資訊

@@ -29,56 +29,59 @@
 
         <p>立即購買票券，加入我們，與這位鬍子大叔一同燃燒搖滾之夜，讓音樂的激情在心中迸發！</p>
 
-        <label>場次/地點
-        <select>
-          <option value="one">1/13台北兩廳院</option>
-          <option value="two">1/13台中歌劇院</option>
-          <option value="three">1/13高雄衛武營</option>
-          <option value="four">1/20台北兩廳院</option>
-          <option value="five">1/20台中歌劇院</option>
-          <option value="six">1/20高雄衛武營</option>
+        <form th:action="@{/shopping/addToCart}" method="post">
+        <label for="select1">場次/地點
+        <select id="select1" name="dateandlocation">
+          <option value="1">1/13台北兩廳院</option>
+          <option value="2">1/13台中歌劇院</option>
+          <option value="3">1/13高雄衛武營</option>
+          <option value="4">1/20台北兩廳院</option>
+          <option value="5">1/20台中歌劇院</option>
+          <option value="6">1/20高雄衛武營</option>
         </select>
         </label>
 
-        <label>票種
-          <select>
-            <option value="first">敬老票</option>
-            <option value="second">學生票</option>
-            <option value="third">全票</option>
-
+        <label for="select2">票種
+          <select id="select2" name="tickettype">
+            <option value="1">敬老票</option>
+            <option value="2">學生票</option>
+            <option value="3">全票</option>
           </select>
         </label>
 
-        <div class="row">
-          <div class="small-3 columns">
-            <label for="middle-label" class="middle">數量</label>
-          </div>
-          <div class="small-9 columns">
-            <input type="text" id="middle-label" placeholder="請輸入數量">
-          </div>
-        </div>
-
-
-        <label>支付方式
-          <select>
-            <option value="first">信用卡</option>
-            <option value="second">超商付款</option>
-            <option value="third">轉帳</option>
-
-          </select>
-        </label>
-
-        <label>取票方式
-          <select>
-            <option value="first">超商取票</option>
-            <option value="second">現場取票</option>
-            <option value="third">電子票券</option>
-
+        <label for="select3" >數量
+          <select id="select3" name="quantity">
+            <option value="1">1張</option>
+            <option value="2">2張</option>
+            <option value="3">3張</option>
+            <option value="4">4張</option>
+            <option value="5">5張</option>
+            <option value="6">6張</option>
           </select>
         </label>
 
 
-        <a href="#" class="button large expanded">加入購物車</a>
+        <label for="select4" >支付方式
+          <select id="select4" name="payment">
+            <option value="1">信用卡</option>
+            <option value="2">超商付款</option>
+            <option value="3">轉帳</option>
+
+          </select>
+        </label>
+
+        <label for="select5" >取票方式
+          <select id="select5" name="collection">
+            <option value="1">超商取票</option>
+            <option value="2">現場取票</option>
+            <option value="3">電子票券</option>
+
+          </select>
+        </label>
+
+        <input type="submit" value="加入購物車" class="button large expanded">
+        </form>
+
 
         <div class="small secondary expanded button-group">
 
@@ -93,7 +96,7 @@
   <ul>
     <li> </li>
   </ul>
-  <a href="http://localhost:8080/concert-page/second">
+  <a href="/concert-page/second">
     <div class="media-object stack-for-small">
       <div class="media-object-section">
         <img class="thumbnail" src="/images/示意圖2.jpg">
@@ -104,7 +107,7 @@
       </div>
     </div>
   </a>
-  <a href="http://localhost:8080/concert-page/third">
+  <a href="/concert-page/third">
     <div class="media-object stack-for-small">
       <div class="media-object-section">
         <img class="thumbnail" src="/images/示意圖3.jpg">

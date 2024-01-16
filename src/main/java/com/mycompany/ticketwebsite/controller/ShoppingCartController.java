@@ -39,17 +39,15 @@ public class ShoppingCartController {
 
     @PostMapping("/addToCart")
     public String addToCart(@RequestParam int dateandlocation,
-                            @RequestParam String seat,
                             @RequestParam int tickettype,
                             @RequestParam int payment,
                             @RequestParam int collection,
                             @RequestParam int quantity,
-                            @RequestParam int price,
                             HttpSession session) {
 
         ShoppingCart cart = getOrCreateShoppingCart(session);
         // 將以下代碼改為直接將參數傳遞給 addToCart 方法
-        shoppingCartService.addToCart(cart, dateandlocation, seat, tickettype, payment, collection, quantity, price);
+        shoppingCartService.addToCart(cart, dateandlocation, tickettype, payment, collection, quantity);
         return "redirect:/shopping-cart";
     }
 

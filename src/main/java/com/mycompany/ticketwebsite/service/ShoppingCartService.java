@@ -86,7 +86,9 @@ public class ShoppingCartService {
     }
 
 
-    public void addToCart(ShoppingCart cart, int dateandlocation, String seat, int tickettype, int payment, int collection, int quantity, int price) {
+
+
+    public void addToCart(ShoppingCart cart, int dateandlocation, int tickettype, int payment, int collection, int quantity) {
         // 實現加入購物車的邏輯
 
         if (cart.getTicketInfoModels().stream().anyMatch(item -> item.getDateandlocation() == dateandlocation)) {
@@ -101,12 +103,10 @@ public class ShoppingCartService {
             TicketInfoModel newItem = new TicketInfoModel();
             newItem.setProductName(productName);
             newItem.setDateandlocation(dateandlocation);
-            newItem.setSeat(seat);
             newItem.setTickettype(tickettype);
             newItem.setPayment(payment);
             newItem.setCollection(collection);
             newItem.setQuantity(quantity);
-            newItem.setPrice(price);
 
             cart.getTicketInfoModels().add(newItem);
         }
