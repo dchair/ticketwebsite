@@ -19,12 +19,12 @@ public class ShoppingCartService {
     private final ShoppingCart shoppingCart = new ShoppingCart();
     private final Map<Integer, String> dateandlocationToProductName = createProductIdToProductNameMap();
     List<String> productNames = Arrays.asList(
-            "1/13台北兩廳院(1)","1/13台中歌劇院(1)","1/13高雄衛武營(1)",
-            "1/20台北兩廳院(1)","1/20台中歌劇院(1)","1/20高雄衛武營(1)",
-            "1/13台北兩廳院(2)","1/13台中歌劇院(2)","1/13高雄衛武營(2)",
-            "1/20台北兩廳院(2)","1/20台中歌劇院(2)","1/20高雄衛武營(2)",
-            "1/13台北兩廳院(3)","1/13台中歌劇院(3)","1/13高雄衛武營(3)",
-            "1/20台北兩廳院(3)","1/20台中歌劇院(3)","1/20高雄衛武營(3)");
+            "1/13台北兩廳院(1)", "1/13台中歌劇院(1)", "1/13高雄衛武營(1)",
+            "1/20台北兩廳院(1)", "1/20台中歌劇院(1)", "1/20高雄衛武營(1)",
+            "1/13台北兩廳院(2)", "1/13台中歌劇院(2)", "1/13高雄衛武營(2)",
+            "1/20台北兩廳院(2)", "1/20台中歌劇院(2)", "1/20高雄衛武營(2)",
+            "1/13台北兩廳院(3)", "1/13台中歌劇院(3)", "1/13高雄衛武營(3)",
+            "1/20台北兩廳院(3)", "1/20台中歌劇院(3)", "1/20高雄衛武營(3)");
 
     private Map<Integer, String> createProductIdToProductNameMap() {
         Map<Integer, String> map = new HashMap<>();
@@ -35,6 +35,7 @@ public class ShoppingCartService {
         }
         return map;
     }
+
     @Autowired
     private TicketDao ticketDao;
 
@@ -46,28 +47,69 @@ public class ShoppingCartService {
         return ticketList.isEmpty() ? null : ticketList.get(0);
     }
 
+    private final Map<Integer, String> ticketTypeMap = createTicketTypeMap();
+    public String getTicketTypeDescription(int tickettype) {
+        return ticketTypeMap.get(tickettype);
+    }
 
-    public void addToCart(ShoppingCart cart, TicketInfoModel ticketInfo, int quantity) {
+    private Map<Integer, String> createTicketTypeMap() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "敬老票");
+        map.put(2, "學生票");
+        map.put(3, "全票");
+        return map;
+    }
+    private final Map<Integer, String> paymentMap = createPaymentMap();
+
+    public String getPaymentDescription(int payment) {
+        return paymentMap.get(payment);
+    }
+    private Map<Integer, String> createPaymentMap() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "信用卡");
+        map.put(2, "超商付款");
+        map.put(3, "轉帳");
+        return map;
+    }
+
+
+    private final Map<Integer, String> collectionMap = createCollectionMap();
+    public String getCollectionDescription(int collection) {
+        return collectionMap.get(collection);
+    }
+    private Map<Integer, String> createCollectionMap() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "超商取票");
+        map.put(2, "現場取票");
+        map.put(3, "電子票券");
+        return map;
+    }
+
+
+    public void addToCart(ShoppingCart cart, int dateandlocation, String seat, int tickettype, int payment, int collection, int quantity, int price) {
         // 實現加入購物車的邏輯
 
-        int dateandlocation = ticketInfo.getDateandlocation(); // 使用 dateandlocation 作為商品 ID
-        String productName = dateandlocationToProductName.get(dateandlocation); // 根據商品 ID 獲取商品名稱
+        if (cart.getTicketInfoModels().stream().anyMatch(item -> item.getDateandlocation() == dateandlocation)) {
+            cart.getTicketInfoModels().stream()
+                    .filter(item -> item.getDateandlocation() == dateandlocation)
+                    .findFirst()
+                    .ifPresent(item -> item.setQuantity(item.getQuantity() + quantity));
+        } else {
 
-        // 檢查購物車中是否已存在相同商品，如果存在，則增加數量而不是新增
-        for (TicketInfoModel item : cart.getTicketInfoModels()) {
-            if (item.getDateandlocation() == dateandlocation) {
-                item.setQuantity(item.getQuantity() + quantity);
-                return;
-            }
+            // 如果購物車中不存在相同商品，創建新的 TicketInfoModel 物件並添加到購物車中
+            String productName = dateandlocationToProductName.get(dateandlocation);
+            TicketInfoModel newItem = new TicketInfoModel();
+            newItem.setProductName(productName);
+            newItem.setDateandlocation(dateandlocation);
+            newItem.setSeat(seat);
+            newItem.setTickettype(tickettype);
+            newItem.setPayment(payment);
+            newItem.setCollection(collection);
+            newItem.setQuantity(quantity);
+            newItem.setPrice(price);
+
+            cart.getTicketInfoModels().add(newItem);
         }
-
-        TicketInfoModel newItem = new TicketInfoModel();
-        newItem.setDateandlocation(dateandlocation);
-        newItem.setProductName(productName);
-        newItem.setPrice(ticketInfo.getPrice()); // 假設 ticketInfo 包含商品價格
-        newItem.setQuantity(quantity);
-
-        cart.getTicketInfoModels().add(newItem);
     }
 
 
@@ -94,6 +136,5 @@ public class ShoppingCartService {
         // 實現結帳的邏輯
         // 清空 ShoppingCart 中的 ticketinfomodels
         cart.getTicketInfoModels().clear();
-
     }
 }

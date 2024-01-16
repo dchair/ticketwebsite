@@ -32,10 +32,6 @@ public class ShoppingCartController {
     @GetMapping("/cart")
     public String viewCart(Model model, HttpSession session) {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
-        }
         model.addAttribute("cart", cart);
         return "shopping-cart";
         //  當用戶訪問購物車頁面時，這個方法會檢查 Session 中的購物車，如果不存在則創建一個新的購物車。
@@ -50,27 +46,13 @@ public class ShoppingCartController {
                             @RequestParam int quantity,
                             @RequestParam int price,
                             HttpSession session) {
-        // 在此處創建 TicketInfoModel 物件，然後加入購物車
-        TicketInfoModel ticketInfoModel = new TicketInfoModel(dateandlocation, seat, tickettype, payment, collection, 0, quantity, price);
 
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
-        }
-
-        // 在此處根據 dateandlocation 查詢相應的 TicketInfoModel 物件
-        TicketInfoModel ticketInfo = shoppingCartService.getTicketInfoByDateandlocation(dateandlocation);
-
-        // 處理找不到商品的情況，這裡假設 getTicketInfoByProductId 方法會返回 null
-        if (ticketInfo == null) {
-            // 可以根據實際情況進行處理，例如返回一個錯誤頁面或重定向到購物車頁面
-            return "redirect:/error";
-        }
-
-        shoppingCartService.addToCart(cart, ticketInfo, quantity);
+        ShoppingCart cart = getOrCreateShoppingCart(session);
+        // 將以下代碼改為直接將參數傳遞給 addToCart 方法
+        shoppingCartService.addToCart(cart, dateandlocation, seat, tickettype, payment, collection, quantity, price);
         return "redirect:/shopping-cart";
     }
+
 
     @PostMapping("/removeFromCart")
     public String removeFromCart(@RequestParam int dateandlocation, HttpSession session) {
@@ -81,4 +63,15 @@ public class ShoppingCartController {
         return "redirect:/shopping-cart"; // 重新導向購物車頁面
     }
     // 當用戶提交從購物車移除商品的表單時，這個方法會從 Session 中獲取購物車，如果存在則調用
+
+
+    // 添加一個方法來獲取或創建 ShoppingCart
+    private ShoppingCart getOrCreateShoppingCart(HttpSession session) {
+    ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+    if (cart == null) {
+        cart = new ShoppingCart();
+        session.setAttribute("cart", cart);
+    }
+    return cart;
+    }
 }
