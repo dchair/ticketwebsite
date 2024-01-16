@@ -4,6 +4,7 @@ import com.mycompany.ticketwebsite.DAO.mapper.UserRowMapper;
 
 import com.mycompany.ticketwebsite.model.UserRegModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +20,13 @@ public class UserDao {
     }
     //查詢密碼
     public UserRegModel findByUsername(String username){
-        String sql3="SELECT * FROM USER where username=?";
-        return jdbcTemplate.queryForObject(sql3, new Object[]{username}, new UserRowMapper());
+        String sql3 = "SELECT * FROM USER where username=? LIMIT 1";
+        try {
+            return jdbcTemplate.queryForObject(sql3, new Object[]{username}, new UserRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            // 如果找不到匹配的數據，返回 null
+            return null;
+        }
     }
     //查詢帳號是否存在
 

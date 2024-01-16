@@ -12,6 +12,7 @@ import java.util.List;
 public class TicketDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     //新增一筆訂票資料
     public int saveTicket(TicketInfoModel ticket) {
         String sql2 = "INSERT INTO ticketinfo(dateandlocation, tickettype, payment, collection, userid) values(?,?,?,?,?,?)";
@@ -19,12 +20,12 @@ public class TicketDao {
     }
 
     //查詢所有訂票資訊
-    public List<TicketInfoModel> getTicketInfoModelAll(){
+    public List<TicketInfoModel> getTicketInfoModelAll() {
         return jdbcTemplate.query("SELECT * FROM ticketinfo", new TicketMapper());
     }
+
     //查詢所有地點場次
-    public List<TicketInfoModel> getTicketinfoByDateandlocation(String dateandlocation){
+    public List<TicketInfoModel> getTicketinfoByDateandlocation(String dateandlocation) {
         return jdbcTemplate.query("SELECT * FROM ticketinfo where dateandlocation=?", new TicketMapper(), dateandlocation);
     }
-
 }
