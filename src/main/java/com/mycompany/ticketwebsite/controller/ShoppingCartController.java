@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/shopping")
 public class ShoppingCartController {
@@ -32,7 +34,7 @@ public class ShoppingCartController {
 
     @GetMapping("/cart")
     public String viewCart(Model model, HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        ShoppingCart cart = shoppingCartService.getOrCreateShoppingCart(session);
         model.addAttribute("cart", cart);
         return "shopping-cart";
         //  當用戶訪問購物車頁面時，這個方法會檢查 Session 中的購物車，如果不存在則創建一個新的購物車。
@@ -44,15 +46,33 @@ public class ShoppingCartController {
                             @RequestParam String payment,
                             @RequestParam String collection,
                             @RequestParam int quantity,
-                            RedirectAttributes redirectAttributes) {
-        // 在這裡處理表單提交，例如將參數放入購物車
+                            RedirectAttributes redirectAttributes, Model model, HttpSession session) {
+        // 添加日誌輸出
+        System.out.println("dateandlocation: " + dateandlocation);
+        System.out.println("price: " + price);
+        System.out.println("payment: " + payment);
+        System.out.println("collection: " + collection);
+        System.out.println("quantity: " + quantity);
+        // 获取产品名称
+        Map<Integer, String> productNames = shoppingCartService.getDateandlocationToProductName();
+        String productName = productNames.get(dateandlocation);
 
-        // 假設有一個購物車服務類，將商品信息添加到購物車
-        shoppingCartService.addToCart(dateandlocation, price, payment, collection, quantity);
+        // 假设有一个购物车服务类，将商品信息添加到购物车
+        shoppingCartService.addToCart(dateandlocation, productName, price, payment, collection, quantity);
+        // 添加 cart 和 productNames 到模型中
+        model.addAttribute("cart", shoppingCartService.getOrCreateShoppingCart(session));
+        model.addAttribute("productNames", productNames);
 
-        // 重定向到購物車頁面
-        redirectAttributes.addFlashAttribute("successMessage", "成功將商品添加到購物車！");
-        return "redirect:/shopping-cart";
+
+        // 重定向到购物车页面
+        redirectAttributes.addFlashAttribute("successMessage", "成功将商品添加到购物车！");
+        return "redirect:/shopping/cart";
+    }
+
+
+    @GetMapping("/productNames")
+    public Map<Integer, String> getProductNames() {
+        return shoppingCartService.getDateandlocationToProductName();
     }
 
     @PostMapping("/removeFromCart")
@@ -68,11 +88,13 @@ public class ShoppingCartController {
 
     // 添加一個方法來獲取或創建 ShoppingCart
     private ShoppingCart getOrCreateShoppingCart(HttpSession session) {
-    ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-    if (cart == null) {
-        cart = new ShoppingCart();
-        session.setAttribute("cart", cart);
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new ShoppingCart();
+            session.setAttribute("cart", cart);
+        }
+        return cart;
     }
-    return cart;
+
     }
-}
+
