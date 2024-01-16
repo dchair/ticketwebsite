@@ -14,8 +14,8 @@ public class TicketDao {
     private JdbcTemplate jdbcTemplate;
     //新增一筆訂票資料
     public int saveTicket(TicketInfoModel ticket) {
-        String sql2 = "INSERT INTO ticketinfo(dateandlocation, seat, tickettype, payment, collection, userid) values(?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql2, ticket.getDateandlocation(), ticket.getSeat(), ticket.getTickettype(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
+        String sql2 = "INSERT INTO ticketinfo(dateandlocation, tickettype, payment, collection, userid) values(?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql2, ticket.getDateandlocation(), ticket.getTickettype(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
     }
 
     //查詢所有訂票資訊
@@ -25,10 +25,6 @@ public class TicketDao {
     //查詢所有地點場次
     public List<TicketInfoModel> getTicketinfoByDateandlocation(String dateandlocation){
         return jdbcTemplate.query("SELECT * FROM ticketinfo where dateandlocation=?", new TicketMapper(), dateandlocation);
-    }
-    //查詢所有位置
-    public List<TicketInfoModel> getTicketinfoBySeat(String seat){
-        return jdbcTemplate.query("SELECT * FROM ticketinfo where seat=?", new TicketMapper(), seat);
     }
 
 }

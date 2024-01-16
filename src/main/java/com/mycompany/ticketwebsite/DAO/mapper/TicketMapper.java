@@ -11,7 +11,6 @@ public class TicketMapper implements RowMapper<TicketInfoModel> {
     public TicketInfoModel mapRow(ResultSet rs, int rowNum) throws SQLException{
         TicketInfoModel t= new TicketInfoModel();
         t.setDateandlocation(rs.getShort("dateandlocation"));
-        t.setSeat(rs.getString("seat"));
         t.setTickettype(rs.getShort("tickettype"));
         t.setPayment(rs.getShort("payment"));
         t.setCollection(rs.getShort("collection"));
