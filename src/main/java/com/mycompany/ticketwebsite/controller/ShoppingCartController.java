@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/shopping")
@@ -39,18 +40,20 @@ public class ShoppingCartController {
 
     @PostMapping("/addToCart")
     public String addToCart(@RequestParam int dateandlocation,
-                            @RequestParam int tickettype,
-                            @RequestParam int payment,
-                            @RequestParam int collection,
+                            @RequestParam String price,
+                            @RequestParam String payment,
+                            @RequestParam String collection,
                             @RequestParam int quantity,
-                            HttpSession session) {
+                            RedirectAttributes redirectAttributes) {
+        // 在這裡處理表單提交，例如將參數放入購物車
 
-        ShoppingCart cart = getOrCreateShoppingCart(session);
-        // 將以下代碼改為直接將參數傳遞給 addToCart 方法
-        shoppingCartService.addToCart(cart, dateandlocation, tickettype, payment, collection, quantity);
+        // 假設有一個購物車服務類，將商品信息添加到購物車
+        shoppingCartService.addToCart(dateandlocation, price, payment, collection, quantity);
+
+        // 重定向到購物車頁面
+        redirectAttributes.addFlashAttribute("successMessage", "成功將商品添加到購物車！");
         return "redirect:/shopping-cart";
     }
-
 
     @PostMapping("/removeFromCart")
     public String removeFromCart(@RequestParam int dateandlocation, HttpSession session) {

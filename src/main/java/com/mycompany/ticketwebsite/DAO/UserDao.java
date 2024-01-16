@@ -35,12 +35,5 @@ public class UserDao {
         return jdbcTemplate.queryForObject(sql,Long.class,username);
     }
 
-    //更新密碼
-    public void updatePassword(UserRegModel user){
-        String sql4 = "UPDATE USER SET password=? WHERE username=?";
-        jdbcTemplate.update(sql4, user.getPassword(), user.getUsername());
-    }
-
-
 }
 

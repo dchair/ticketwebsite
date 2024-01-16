@@ -47,68 +47,25 @@ public class ShoppingCartService {
         return ticketList.isEmpty() ? null : ticketList.get(0);
     }
 
-    private final Map<Integer, String> ticketTypeMap = createTicketTypeMap();
-    public String getTicketTypeDescription(int tickettype) {
-        return ticketTypeMap.get(tickettype);
-    }
+    public void addToCart(int dateandlocation, String price, String payment, String  collection, int quantity) {
+        /// 根據日期和地點查找相應的票務信息
+        TicketInfoModel ticketInfo = this.getTicketInfoByDateandlocation(dateandlocation);
 
-    private Map<Integer, String> createTicketTypeMap() {
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1, "敬老票");
-        map.put(2, "學生票");
-        map.put(3, "全票");
-        return map;
-    }
-    private final Map<Integer, String> paymentMap = createPaymentMap();
-
-    public String getPaymentDescription(int payment) {
-        return paymentMap.get(payment);
-    }
-    private Map<Integer, String> createPaymentMap() {
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1, "信用卡");
-        map.put(2, "超商付款");
-        map.put(3, "轉帳");
-        return map;
-    }
-
-
-    private final Map<Integer, String> collectionMap = createCollectionMap();
-    public String getCollectionDescription(int collection) {
-        return collectionMap.get(collection);
-    }
-    private Map<Integer, String> createCollectionMap() {
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1, "超商取票");
-        map.put(2, "現場取票");
-        map.put(3, "電子票券");
-        return map;
-    }
-
-
-
-
-    public void addToCart(ShoppingCart cart, int dateandlocation, int tickettype, int payment, int collection, int quantity) {
-        // 實現加入購物車的邏輯
-
-        if (cart.getTicketInfoModels().stream().anyMatch(item -> item.getDateandlocation() == dateandlocation)) {
-            cart.getTicketInfoModels().stream()
-                    .filter(item -> item.getDateandlocation() == dateandlocation)
-                    .findFirst()
-                    .ifPresent(item -> item.setQuantity(item.getQuantity() + quantity));
+        if (ticketInfo != null) {
+            // 如果購物車中已經存在相同的商品，更新數量等信息
+            ticketInfo.setQuantity(ticketInfo.getQuantity() + quantity);
         } else {
-
             // 如果購物車中不存在相同商品，創建新的 TicketInfoModel 物件並添加到購物車中
             String productName = dateandlocationToProductName.get(dateandlocation);
+
             TicketInfoModel newItem = new TicketInfoModel();
             newItem.setProductName(productName);
             newItem.setDateandlocation(dateandlocation);
-            newItem.setTickettype(tickettype);
+            newItem.setPrice(price);
             newItem.setPayment(payment);
             newItem.setCollection(collection);
-            newItem.setQuantity(quantity);
 
-            cart.getTicketInfoModels().add(newItem);
+            shoppingCart.getTicketInfoModels().add(newItem);
         }
     }
 
