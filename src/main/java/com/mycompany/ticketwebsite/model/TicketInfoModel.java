@@ -24,5 +24,10 @@ public class TicketInfoModel {
     private int userid;
     private int quantity;
     private int price;
+
+    // 新增方法來設定商品名稱
+    public void setProductName(String productName) {
+        // 可以根據需要在這裡進行設定，例如將商品名稱存儲在某個欄位中
+    }
 }
 
