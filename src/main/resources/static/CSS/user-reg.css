@@ -109,12 +109,12 @@ img {
 
 /*-- end reset --*/
 body {
-    background: #33D7FF;
+    background: #C8E2E6;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #33D7FF, #33D7FF);
-    background: -moz-linear-gradient(to top, #33D7FF, #33D7FF);
-    background: -o-linear-gradient(to top, #33D7FF, #33D7FF);
-    background: linear-gradient(to top, #33D7FF, #33D7FF);
+    background: -webkit-linear-gradient(to top, #C8E2E6, #C8E2E6);
+    background: -moz-linear-gradient(to top, #C8E2E6, #C8E2E6);
+    background: -o-linear-gradient(to top, #C8E2E6, #C8E2E6);
+    background: linear-gradient(to top, #C8E2E6, #C8E2E6);
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
@@ -123,7 +123,7 @@ body {
 h1 {
     font-size: 3em;
     text-align: center;
-    color: #fff;
+    color: #000000;
     font-weight: 100;
     text-transform: capitalize;
     letter-spacing: 4px;
@@ -148,7 +148,7 @@ h1 {
 
 input[type="text"], input[type="email"], input[type="password"] {
     font-size: 0.9em;
-    color: #fff;
+    color: #000000;
     font-weight: 100;
     width: 94.5%;
     display: block;
@@ -188,7 +188,7 @@ input.email, input.text.w3lpass {
 }
 
 ::-webkit-input-placeholder {
-    color: #fff;
+    color: #000000;
     font-weight: 100;
 }
 
@@ -208,10 +208,10 @@ input.email, input.text.w3lpass {
 
 input[type="submit"] {
     font-size: .9em;
-    color: #fff;
-    background: #33D7FF;
+    color: #000000;
+    background: #C8E2E6;
     outline: none;
-    border: 1px solid #33D7FF;
+    border: 1px solid #C8E2E6;
     cursor: pointer;
     padding: 0.9em;
     -webkit-appearance: none;
@@ -231,14 +231,14 @@ input[type="submit"]:hover {
 
 .agileits-top p {
     font-size: 1em;
-    color: #fff;
+    color: #000000;
     text-align: center;
     letter-spacing: 1px;
     font-weight: 300;
 }
 
 .agileits-top p a {
-    color: #fff;
+    color: #FF0215;
     -webkit-transition: .5s all;
     -moz-transition: .5s all;
     transition: .5s all;
@@ -246,7 +246,7 @@ input[type="submit"]:hover {
 }
 
 .agileits-top p a:hover {
-    color: #33D7FF;
+    color: #FF0215;
 }
 
 /*-- //main --*/
@@ -260,7 +260,7 @@ input[type="submit"]:hover {
 }
 
 input.checkbox {
-    background: #33D7FF;
+    background: #C8E2E6;
     cursor: pointer;
     width: 1.2em;
     height: 1.2em;
@@ -317,12 +317,12 @@ input.checkbox:checked:after {
 
 @keyframes rippling {
     50% {
-        border-left-color: #fff;
+        border-left-color: #000000;
     }
 
     100% {
-        border-bottom-color: #fff;
-        border-left-color: #fff;
+        border-bottom-color:  #000000;
+        border-left-color:  #000000;
     }
 }
 
@@ -335,14 +335,14 @@ input.checkbox:checked:after {
 
 .colorlibcopy-agile p {
     font-size: .9em;
-    color: #fff;
+    color: #000;
     line-height: 1.8em;
     letter-spacing: 1px;
     font-weight: 100;
 }
 
 .colorlibcopy-agile p a {
-    color: #fff;
+    color: #000;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
