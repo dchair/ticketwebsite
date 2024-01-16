@@ -60,7 +60,7 @@ public class ShoppingCartController {
         if (cart != null) {
             shoppingCartService.removeFromCart(cart, dateandlocation);
         }
-        return "redirect:/shopping-cart"; // 重新導向購物車頁面
+        return "redirect:/shopping-cart";
     }
     // 當用戶提交從購物車移除商品的表單時，這個方法會從 Session 中獲取購物車，如果存在則調用
 
