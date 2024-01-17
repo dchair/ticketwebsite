@@ -28,10 +28,17 @@
 
     <p>立即購買票券，加入我們，與這位鬍子大叔一同燃燒搖滾之夜，讓音樂的激情在心中迸發！</p>
 
-    <form th:action="@{/shopping/addToCart}" method="post" th:object="${cart}">
-      <label for="select1">場次/地點
-        <select id="select1" name="ticketInfoModels[0].dateandlocation">
-          <option th:each="entry : ${productNames}" th:value="${entry.key}" th:text="${entry.value}"></option>
+    <form th:action="@{/shopping/addToCart}" method="post">
+      <label for="select1">場次/地點</label>
+        <select id="select1" name="dateandlocation">
+              <option value="1/13台北兩廳院">1/13台北兩廳院</option>
+              <option value="1/13台中歌劇院">1/13台中歌劇院</option>
+              <option value="1/13高雄衛武營">1/13高雄衛武營</option>
+              <option value="1/20台北兩廳院">1/20台北兩廳院</option>
+              <option value="1/20台中歌劇院">1/20台中歌劇院</option>
+              <option value="1/20高雄衛武營">1/20高雄衛武營</option>
+            </select>
+          </label>
         </select>
       </label>
 

@@ -10,7 +10,7 @@ public class TicketMapper implements RowMapper<TicketInfoModel> {
     @Override
     public TicketInfoModel mapRow(ResultSet rs, int rowNum) throws SQLException{
         TicketInfoModel t= new TicketInfoModel();
-        t.setDateandlocation(rs.getInt("dateandlocation"));
+        t.setDateandlocation(rs.getString("dateandlocation"));
         t.setPrice(rs.getString("price"));
         t.setPayment(rs.getString("payment"));
         t.setCollection(rs.getString("collection"));

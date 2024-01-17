@@ -40,30 +40,21 @@ public class ShoppingCartController {
     @PostMapping("/addToCart")
     public String addToCart(@ModelAttribute TicketInfoModel ticketInfoModel,
                             RedirectAttributes redirectAttributes, Model model, HttpSession session) {
-        // 获取产品名称
-        Map<Integer, String> productNames = shoppingCartService.getDateandlocationToProductName();
-        String productName = productNames.get(ticketInfoModel.getDateandlocation());
 
-        // 假设有一个购物车服务类，将商品信息添加到购物车
-        shoppingCartService.addToCart(ticketInfoModel.getDateandlocation(), productName, ticketInfoModel.getPrice(), ticketInfoModel.getPayment(), ticketInfoModel.getCollection(), ticketInfoModel.getQuantity());
+        // 添加购物车
+        shoppingCartService.addToCart(ticketInfoModel.getDateandlocation(), ticketInfoModel.getPrice(), ticketInfoModel.getPayment(), ticketInfoModel.getCollection(), ticketInfoModel.getQuantity());
+
+
         // 添加 cart 和 productNames 到模型中
         model.addAttribute("cart", shoppingCartService.getOrCreateShoppingCart(session));
-        model.addAttribute("productNames", productNames);
-
 
         // 重定向到购物车页面
         redirectAttributes.addFlashAttribute("successMessage", "成功将商品添加到购物车！");
         return "redirect:/shopping/cart";
     }
 
-
-    @GetMapping("/productNames")
-    public Map<Integer, String> getProductNames() {
-        return shoppingCartService.getDateandlocationToProductName();
-    }
-
     @PostMapping("/removeFromCart")
-    public String removeFromCart(@RequestParam int dateandlocation, HttpSession session) {
+    public String removeFromCart(@RequestParam String dateandlocation, HttpSession session) {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart != null) {
             shoppingCartService.removeFromCart(cart, dateandlocation);
