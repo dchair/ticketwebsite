@@ -34,7 +34,13 @@ public class ShoppingCartController {
         ShoppingCart cart = shoppingCartService.getOrCreateShoppingCart(session);
         model.addAttribute("cart", cart);
         return "shopping-cart";
-        //  當用戶訪問購物車頁面時，這個方法會檢查 Session 中的購物車，如果不存在則創建一個新的購物車。
+    }
+
+    @ModelAttribute("ticketInfoModel")
+    public TicketInfoModel ticketInfoModel() {
+        TicketInfoModel model = new TicketInfoModel();
+        System.out.println("Creating ticketInfoModel: " + model);
+        return model;
     }
 
     @PostMapping("/addToCart")
@@ -43,13 +49,11 @@ public class ShoppingCartController {
 
         // 添加购物车
         shoppingCartService.addToCart(ticketInfoModel.getDateandlocation(), ticketInfoModel.getPrice(), ticketInfoModel.getPayment(), ticketInfoModel.getCollection(), ticketInfoModel.getQuantity());
-
-
         // 添加 cart 和 productNames 到模型中
         model.addAttribute("cart", shoppingCartService.getOrCreateShoppingCart(session));
-
         // 重定向到购物车页面
         redirectAttributes.addFlashAttribute("successMessage", "成功将商品添加到购物车！");
+
         return "redirect:/shopping/cart";
     }
 
@@ -65,14 +69,17 @@ public class ShoppingCartController {
 
 
     // 添加一個方法來獲取或創建 ShoppingCart
-    private ShoppingCart getOrCreateShoppingCart(HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+    private static final String CART_SESSION_ATTRIBUTE = "cart";
+
+    private synchronized ShoppingCart getOrCreateShoppingCart(HttpSession session) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute(CART_SESSION_ATTRIBUTE);
         if (cart == null) {
             cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
+            session.setAttribute(CART_SESSION_ATTRIBUTE, cart);
         }
         return cart;
     }
+
 
     }
 

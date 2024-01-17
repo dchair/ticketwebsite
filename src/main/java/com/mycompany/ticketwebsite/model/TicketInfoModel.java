@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -20,8 +21,32 @@ public class TicketInfoModel {
     //支付方式 1.信用卡 2.超商付款 3.轉帳
     private String collection;
     //取票方式 1.超商取票 2.現場取票 3.電子票券
-    private String userid;
+    private String userid = "1"; // 初始化 userid
     private int quantity;
+
+    public String getDateandlocation() {
+        return dateandlocation;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public String getCollection() {
+        return collection;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 
 
 }

@@ -28,19 +28,16 @@
 
     <p>立即購買票券，加入我們，與這位鬍子大叔一同燃燒搖滾之夜，讓音樂的激情在心中迸發！</p>
 
-    <form th:action="@{/shopping/addToCart}" method="post">
+    <form method="post" th:action="@{/shopping/addToCart}" th:object="${ticketInfoModel}">
       <label for="select1">場次/地點</label>
-        <select id="select1" name="dateandlocation">
-              <option value="1/13台北兩廳院">1/13台北兩廳院</option>
-              <option value="1/13台中歌劇院">1/13台中歌劇院</option>
-              <option value="1/13高雄衛武營">1/13高雄衛武營</option>
-              <option value="1/20台北兩廳院">1/20台北兩廳院</option>
-              <option value="1/20台中歌劇院">1/20台中歌劇院</option>
-              <option value="1/20高雄衛武營">1/20高雄衛武營</option>
-            </select>
-          </label>
-        </select>
-      </label>
+      <select id="select1" name="dateandlocation">
+        <option value="1/13台北兩廳院">1/13台北兩廳院</option>
+        <option value="1/13台中歌劇院">1/13台中歌劇院</option>
+        <option value="1/13高雄衛武營">1/13高雄衛武營</option>
+        <option value="1/20台北兩廳院">1/20台北兩廳院</option>
+        <option value="1/20台中歌劇院">1/20台中歌劇院</option>
+        <option value="1/20高雄衛武營">1/20高雄衛武營</option>
+      </select>
 
       <label for="select2">價格</label>
       <select id="select2" name="price">
@@ -137,7 +134,7 @@
   }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 <script>
   $(document).foundation();

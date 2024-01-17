@@ -27,20 +27,21 @@ public class ShoppingCartService {
         return ticketList.isEmpty() ? null : ticketList.get(0);
     }
 
-    public void addToCart(String dateandlocation, String price, String payment, String collection,int quantity) {
-        // 根据日期和地点查找相应的票务信息
+    public void addToCart(String dateandlocation, String price, String payment, String collection, int quantity) {
+        // 根據日期和地點查找相應的票務信息
         TicketInfoModel ticketInfo = this.getTicketInfoByDateandlocation(dateandlocation);
 
         if (ticketInfo != null) {
-            // 如果购物车中已经存在相同的商品，更新数量等信息
+            // 如果購物車中已經存在相同的商品，更新數量等信息
             ticketInfo.setQuantity(ticketInfo.getQuantity() + quantity);
         } else {
-            // 如果购物车中不存在相同商品，创建新的 TicketInfoModel 对象并添加到购物车中
+            // 如果購物車中不存在相同商品，創建新的 TicketInfoModel 對象並添加到購物車中
             TicketInfoModel newItem = new TicketInfoModel();
             newItem.setDateandlocation(dateandlocation);
             newItem.setPrice(price);
             newItem.setPayment(payment);
             newItem.setCollection(collection);
+            newItem.setQuantity(quantity);  // 新增數量屬性
 
             shoppingCart.getTicketInfoModels().add(newItem);
         }
@@ -64,13 +65,19 @@ public class ShoppingCartService {
             cart.getTicketInfoModels().remove(itemToRemove);
         }
     }
+
+    private static final String CART_SESSION_ATTRIBUTE = "cart";
+    private static final Object SESSION_LOCK = new Object();
+
     public ShoppingCart getOrCreateShoppingCart(HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
+        synchronized (SESSION_LOCK) {
+            ShoppingCart cart = (ShoppingCart) session.getAttribute(CART_SESSION_ATTRIBUTE);
+            if (cart == null) {
+                cart = new ShoppingCart();
+                session.setAttribute(CART_SESSION_ATTRIBUTE, cart);
+            }
+            return cart;
         }
-        return cart;
     }
 
 
