@@ -34,15 +34,21 @@ public class ShoppingCartController {
         return "shopping-cart";
     }
 
+    @ModelAttribute("ticketModel")
+    public TicketInfoModel getTicketModel() {
+        return new TicketInfoModel();
+    }
+
+
     @PostMapping("/addToCart")
-    public String addToCart(@ModelAttribute("ticketInfoModel") TicketInfoModel ticketInfoModel,
+    public String addToCart(@ModelAttribute("ticketModel") TicketInfoModel ticketModel,
                             RedirectAttributes redirectAttributes, HttpSession session) {
         shoppingCartService.addToCart(
-                ticketInfoModel.getDateandlocation(),
-                ticketInfoModel.getPrice(),
-                ticketInfoModel.getPayment(),
-                ticketInfoModel.getCollection(),
-                ticketInfoModel.getQuantity()
+                ticketModel.getDateandlocation(),
+                ticketModel.getPrice(),
+                ticketModel.getPayment(),
+                ticketModel.getCollection(),
+                ticketModel.getQuantity()
         );
 
         ShoppingCart cart = shoppingCartService.getOrCreateShoppingCart(session);

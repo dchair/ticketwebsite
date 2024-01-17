@@ -24,30 +24,6 @@ public class TicketInfoModel {
     private String userid = "1"; // 初始化 userid
     private int quantity;
 
-    public String getDateandlocation() {
-        return dateandlocation;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public String getPayment() {
-        return payment;
-    }
-
-    public String getCollection() {
-        return collection;
-    }
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
 
 }
 
