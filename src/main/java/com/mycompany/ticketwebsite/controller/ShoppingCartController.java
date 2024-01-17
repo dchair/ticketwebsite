@@ -7,10 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
@@ -41,24 +38,14 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(@RequestParam int dateandlocation,
-                            @RequestParam String price,
-                            @RequestParam String payment,
-                            @RequestParam String collection,
-                            @RequestParam int quantity,
+    public String addToCart(@ModelAttribute TicketInfoModel ticketInfoModel,
                             RedirectAttributes redirectAttributes, Model model, HttpSession session) {
-        // 添加日誌輸出
-        System.out.println("dateandlocation: " + dateandlocation);
-        System.out.println("price: " + price);
-        System.out.println("payment: " + payment);
-        System.out.println("collection: " + collection);
-        System.out.println("quantity: " + quantity);
         // 获取产品名称
         Map<Integer, String> productNames = shoppingCartService.getDateandlocationToProductName();
-        String productName = productNames.get(dateandlocation);
+        String productName = productNames.get(ticketInfoModel.getDateandlocation());
 
         // 假设有一个购物车服务类，将商品信息添加到购物车
-        shoppingCartService.addToCart(dateandlocation, productName, price, payment, collection, quantity);
+        shoppingCartService.addToCart(ticketInfoModel.getDateandlocation(), productName, ticketInfoModel.getPrice(), ticketInfoModel.getPayment(), ticketInfoModel.getCollection(), ticketInfoModel.getQuantity());
         // 添加 cart 和 productNames 到模型中
         model.addAttribute("cart", shoppingCartService.getOrCreateShoppingCart(session));
         model.addAttribute("productNames", productNames);

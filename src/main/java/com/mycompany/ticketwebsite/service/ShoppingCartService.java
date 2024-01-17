@@ -18,6 +18,7 @@ import java.util.Map;
 public class ShoppingCartService {
 
     private final ShoppingCart shoppingCart = new ShoppingCart();
+    @Getter
     private final Map<Integer, String> dateandlocationToProductName = createProductIdToProductNameMap();
     List<String> productNames = Arrays.asList(
             "1/13台北兩廳院(1)", "1/13台中歌劇院(1)", "1/13高雄衛武營(1)",

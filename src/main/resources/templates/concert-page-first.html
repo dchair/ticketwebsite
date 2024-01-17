@@ -30,7 +30,7 @@
 
     <form th:action="@{/shopping/addToCart}" method="post" th:object="${cart}">
       <label for="select1">場次/地點
-        <select id="select1" name="dateandlocation">
+        <select id="select1" name="ticketInfoModels[0].dateandlocation">
           <option th:each="entry : ${productNames}" th:value="${entry.key}" th:text="${entry.value}"></option>
         </select>
       </label>
@@ -130,7 +130,7 @@
   }
 </style>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 <script>
   $(document).foundation();
