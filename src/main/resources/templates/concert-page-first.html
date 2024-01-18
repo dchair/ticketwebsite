@@ -167,11 +167,9 @@
         type: "POST",
         url: "/shopping/addToCart",
         data: formData,
-        success: function(response) {
-          // 处理成功响应，延迟500毫秒后进行页面导航
-          setTimeout(function() {
+        success: function() {
+          // 處理成功後，跳轉購物車頁面
             window.location.href = "/shopping/cart";
-          }, 200);
         },
         error: function(error) {
           console.error("Error:", error);

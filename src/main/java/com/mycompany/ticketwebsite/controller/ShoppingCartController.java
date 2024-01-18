@@ -10,20 +10,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
+import java.util.Map;
+
+@RestController
 @RequestMapping("/shopping")
 public class ShoppingCartController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
 
-    @GetMapping("/checkout")
-    public String checkout(HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart != null) {
-            shoppingCartService.checkout(cart);
-            session.removeAttribute("cart");
-        }
+    @PostMapping("/checkout")
+    public String checkout(@RequestBody TicketInfoModel ticketInfo, HttpSession session) {
+        System.out.println("Received checkout request for ticket: " + ticketInfo);
+
+        shoppingCartService.saveCartToDatebase(ticketInfo);
+        session.setAttribute("checkoutInfo", ticketInfo);
+        System.out.println("Checkout completed successfully.");
+
         return "complete-purchase";
     }
 

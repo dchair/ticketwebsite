@@ -25,50 +25,61 @@
 <script>
     $(document).ready(function() {
         // 從 sessionStorage 中獲取數據
-        var concertName = sessionStorage.getItem('concertName');
-        var concertImage = sessionStorage.getItem('concertImage');
-        var dateandlocation = sessionStorage.getItem('dateandlocation');
-        var price = sessionStorage.getItem('price');
-        var quantity = sessionStorage.getItem('quantity');
-        var payment = sessionStorage.getItem('payment');
-        var collection = sessionStorage.getItem('collection');
-
+        var ticketInfo = {
+            concertName: sessionStorage.getItem('concertName'),
+            concertImage : sessionStorage.getItem('concertImage'),
+            dateandlocation : sessionStorage.getItem('dateandlocation'),
+            price : parseFloat(sessionStorage.getItem('price')),
+            quantity : parseInt(sessionStorage.getItem('quantity')),
+            payment : sessionStorage.getItem('payment'),
+            collection : sessionStorage.getItem('collection')
+        };
 
         // 在這裡你可以使用這些變量執行你的邏輯，例如填充購物車表格等
-        console.log('concertName:', concertName);
-        console.log('concertImage:', concertImage);
-        console.log('Date and Location:', dateandlocation);
-        console.log('Price:', price);
-        console.log('Quantity:', quantity);
-        console.log('Payment:', payment);
-        console.log('Collection:', collection);
+        console.log('Ticket Info', ticketInfo);
 
         // 將數據填充到購物車表格
         var cartTableBody = $('#cartBody');
         var totalPrice = 0;
 
         // 假設只有一個產品，你可以根據實際情況擴展這個邏輯
-        var productTotalPrice = price * quantity;
+        var productTotalPrice = ticketInfo.price * ticketInfo.quantity;
         totalPrice += productTotalPrice;
 
         var newRow = '<tr>' +
-            '<td class="text-center">' + '<img src="' + concertImage + '" alt="' + concertName + '" class="concert-image">' + concertName + '<br>' + dateandlocation + '</td>' +
-            '<td class="text-center">' + collection + '</td>' +
-            '<td class="text-right">' + price + '</td>' +
-            '<td class="text-center">' + quantity + '</td>' +
+            '<td class="text-center">' + '<img src="' + ticketInfo.concertImage + '" alt="' + ticketInfo.concertName + '" class="concert-image">' + ticketInfo.concertName + '<br>' + ticketInfo.dateandlocation + '</td>' +
+            '<td class="text-center">' + ticketInfo.collection + '</td>' +
+            '<td class="text-right">' + ticketInfo.price + '</td>' +
+            '<td class="text-center">' + ticketInfo.quantity + '</td>' +
             '<td class="text-right">' + productTotalPrice.toFixed(0) + '</td>' +
             '<td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>' +
             '</tr>';
 
-
         cartTableBody.append(newRow);
-
-
-
         // 更新總價格
         $('#totalPrice strong').text('$' + totalPrice.toFixed(0));
+
+        // 添加點擊事件處理程序
+        $('#checkoutButton').on('click', function() {
+            // 在此處將購物車數據發送到後端
+            $.ajax({
+                url: '/shopping/checkout',  // 您的後端處理結帳的URL
+                method: 'POST',     // 使用POST方法，以將數據發送到後端
+                contentType: 'application/json',
+                data: JSON.stringify(ticketInfo),
+                success: function(response) {
+                    // 如果結帳成功，可以執行相應的操作，例如顯示成功消息、重定向等
+                    console.log('Checkout successful!', response);
+                },
+                error: function(error) {
+                    // 處理錯誤情況，例如顯示錯誤消息
+                    console.error('Error during checkout:', error);
+                }
+            });
+        });
     });
 </script>
+
 
 <body>
 
@@ -115,7 +126,7 @@
 
         <div class="float-right">
 
-            <button type="button" class="button large expanded">結帳</button>
+            <button id="checkoutButton" type="button" class="button large expanded">結帳</button>
         </div>
 
     </div>

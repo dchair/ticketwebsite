@@ -13,19 +13,23 @@ public class TicketDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    //新增一筆訂票資料
+    // 新增一筆訂票資料
     public int saveTicket(TicketInfoModel ticket) {
-        String sql2 = "INSERT INTO ticketinfo(dateandlocation, price, payment, collection, userid) values(?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql2, ticket.getDateandlocation(), ticket.getPrice(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
+        String sql = "INSERT INTO ticketinfo(dateandlocation, price, payment, collection, userid) VALUES(?, ?, ?, ?, ?)";
+        System.out.println("Executing SQL: " + sql);
+        return jdbcTemplate.update(sql, ticket.getDateandlocation(), ticket.getPrice(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
     }
 
-    //查詢所有訂票資訊
+    // 查詢所有訂票資訊
     public List<TicketInfoModel> getTicketInfoModelAll() {
         return jdbcTemplate.query("SELECT * FROM ticketinfo", new TicketMapper());
     }
 
-    //查詢所有地點場次
+    // 根據日期和地點查詢訂票資訊
     public List<TicketInfoModel> getTicketinfoByDateandlocation(String dateandlocation) {
-        return jdbcTemplate.query("SELECT * FROM ticketinfo where dateandlocation=?", new TicketMapper(), dateandlocation);
+        return jdbcTemplate.query("SELECT * FROM ticketinfo WHERE dateandlocation=?", new TicketMapper(), dateandlocation);
     }
+
+    // 其他可能的數據庫操作...
+
 }

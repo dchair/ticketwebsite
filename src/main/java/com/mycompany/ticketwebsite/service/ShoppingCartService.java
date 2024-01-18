@@ -19,6 +19,13 @@ public class ShoppingCartService {
     @Autowired
     private TicketDao ticketDao;
 
+
+    public void saveCartToDatebase(TicketInfoModel ticketInfo) {
+        // 調用 DAO 保存到資料庫
+        System.out.println("Saving ticket to the database: " + ticketInfo);
+        ticketDao.saveTicket(ticketInfo);
+    }
+
     public TicketInfoModel getTicketInfoByDateandlocation(String dateandlocation) {
         List<TicketInfoModel> ticketList = ticketDao.getTicketinfoByDateandlocation(dateandlocation);
 
@@ -84,6 +91,11 @@ public class ShoppingCartService {
 
     public void checkout(ShoppingCart cart) {
         // 實現結帳的邏輯
+        // 遍歷 ShoppingCart 中的 ticketinfomodels
+        for (TicketInfoModel item : cart.getTicketInfoModels()) {
+            // 調用 TicketDao 將資料存儲到資料庫中
+            ticketDao.saveTicket(item);
+        }
         // 清空 ShoppingCart 中的 ticketinfomodels
         cart.getTicketInfoModels().clear();
     }
