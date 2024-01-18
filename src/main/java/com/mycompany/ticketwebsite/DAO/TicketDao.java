@@ -15,9 +15,9 @@ public class TicketDao {
 
     // 新增一筆訂票資料
     public int saveTicket(TicketInfoModel ticket) {
-        String sql = "INSERT INTO ticketinfo(dateandlocation, price, quantity, collection, userid) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ticketinfo(concertName, dateandlocation, price, quantity, payment, collection, userid) VALUES(?, ?, ?, ?, ?, ?, ?)";
         System.out.println("Executing SQL: " + sql);
-        return jdbcTemplate.update(sql, ticket.getDateandlocation(), ticket.getPrice(), ticket.getQuantity(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
+        return jdbcTemplate.update(sql, ticket.getConcertName(), ticket.getDateandlocation(), ticket.getPrice(), ticket.getQuantity(), ticket.getPayment(), ticket.getCollection(), ticket.getUserid());
     }
 
     // 查詢所有訂票資訊
