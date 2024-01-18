@@ -31,6 +31,7 @@ public class ShoppingCartController {
         return "complete-purchase";
     }
 
+
     @GetMapping("/cart")
     public String viewCart(Model model, HttpSession session) {
         ShoppingCart cart = shoppingCartService.getOrCreateShoppingCart(session);
