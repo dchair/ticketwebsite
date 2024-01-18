@@ -12,7 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
-@RestController
+@CrossOrigin(origins = "*")
+@Controller
 @RequestMapping("/shopping")
 public class ShoppingCartController {
 
