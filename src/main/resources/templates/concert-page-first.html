@@ -150,11 +150,17 @@
       var payment = $('#payment').val();
       var collection = $('#collection').val();
 
-      localStorage.setItem('dateandlocation', dateandlocation);
-      localStorage.setItem('price', price);
-      localStorage.setItem('quantity', quantity);
-      localStorage.setItem('payment', payment);
-      localStorage.setItem('collection', collection);
+      // 獲取演唱會名稱和圖片，這裡假設你已經有相應的變數或者函數可以獲取它們
+      var concertName = "搖滾巨星，來自英國的鬍子大叔";  // 替換為實際獲取演唱會名稱的代碼
+      var concertImage = "/images/示意圖1.jpg";  // 替換為實際獲取演唱會圖片的代碼
+
+      sessionStorage.setItem('concertName', concertName);
+      sessionStorage.setItem('concertImage', concertImage);
+      sessionStorage.setItem('dateandlocation', dateandlocation);
+      sessionStorage.setItem('price', price);
+      sessionStorage.setItem('quantity', quantity);
+      sessionStorage.setItem('payment', payment);
+      sessionStorage.setItem('collection', collection);
 
       // 執行AJAX請求
       $.ajax({
@@ -173,7 +179,7 @@
       })
     });
   });
-  // 將數據存儲到 Local Storage
+  // 將數據存儲到 sessionStorage
 
 </script>
 

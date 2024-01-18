@@ -13,18 +13,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+    <style>
+        img.concert-image {
+            max-width: 75px; /* 限制最大寬度為100像素 */
+            max-height: 75px; /* 限制最大高度為100像素 */
+            width: auto; /* 讓圖片按照比例縮放 */
+            height: auto; /* 讓圖片按照比例縮放 */
+        }
+    </style>
 </head>
 <script>
     $(document).ready(function() {
-        // 從 Local Storage 中獲取數據
-        var dateandlocation = localStorage.getItem('dateandlocation');
-        var price = localStorage.getItem('price');
-        var quantity = localStorage.getItem('quantity');
-        var payment = localStorage.getItem('payment');
-        var collection = localStorage.getItem('collection');
+        // 從 sessionStorage 中獲取數據
+        var concertName = sessionStorage.getItem('concertName');
+        var concertImage = sessionStorage.getItem('concertImage');
+        var dateandlocation = sessionStorage.getItem('dateandlocation');
+        var price = sessionStorage.getItem('price');
+        var quantity = sessionStorage.getItem('quantity');
+        var payment = sessionStorage.getItem('payment');
+        var collection = sessionStorage.getItem('collection');
 
 
         // 在這裡你可以使用這些變量執行你的邏輯，例如填充購物車表格等
+        console.log('concertName:', concertName);
+        console.log('concertImage:', concertImage);
         console.log('Date and Location:', dateandlocation);
         console.log('Price:', price);
         console.log('Quantity:', quantity);
@@ -40,18 +52,21 @@
         totalPrice += productTotalPrice;
 
         var newRow = '<tr>' +
-            '<td class="text-center">' + dateandlocation + '</td>' +
+            '<td class="text-center">' + '<img src="' + concertImage + '" alt="' + concertName + '" class="concert-image">' + concertName + '<br>' + dateandlocation + '</td>' +
             '<td class="text-center">' + collection + '</td>' +
             '<td class="text-right">' + price + '</td>' +
             '<td class="text-center">' + quantity + '</td>' +
-            '<td class="text-right">' + productTotalPrice.toFixed(2) + '</td>' +
-            '<td class="text-center align-middle py-3 px-0"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></td>' +
+            '<td class="text-right">' + productTotalPrice.toFixed(0) + '</td>' +
+            '<td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>' +
             '</tr>';
+
 
         cartTableBody.append(newRow);
 
+
+
         // 更新總價格
-        $('#totalPrice strong').text('$' + totalPrice.toFixed(2));
+        $('#totalPrice strong').text('$' + totalPrice.toFixed(0));
     });
 </script>
 
@@ -63,7 +78,7 @@
     <!-- Shopping cart table -->
     <div class="card">
         <div class="card-header">
-            <h2>購物車</h2>
+            <h2 class="text-center py-3 px-4">訂票明細</h2>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -71,12 +86,12 @@
                     <thead>
                     <tr>
                         <!-- Set columns width -->
-                        <th class="text-center py-3 px-4" style="min-width: 400px">產品名稱 &amp; 產品明細</th>
-                        <th class="text-center py-3 px-4" style="min-width: 400px">取貨方式</th>
-                        <th class="text-right py-3 px-4" style="width: 100px;">價格</th>
-                        <th class="text-center py-3 px-4" style="width: 120px;">數量</th>
-                        <th class="text-right py-3 px-4" style="width: 100px;">加總價格</th>
-                        <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                        <th class="text-center py-3 px-4" style="min-width: 200px;">場次/地點</th>
+                        <th class="text-center py-3 px-4" style="width: 200px;">取貨方式</th>
+                        <th class="text-center py-3 px-4" style="width: 100px;">價格</th>
+                        <th class="text-center py-3 px-4" style="width: 100px;">數量</th>
+                        <th class="text-center py-3 px-4" style="width: 120px;">加總價格</th>
+                        <th class="text-center align-middle px-0">移除</th>
                     </tr>
                     </thead>
                     <tbody id="cartBody">
@@ -93,18 +108,19 @@
 
             </div>
             <div class="text-right mt-4">
-                <label class="text-muted font-weight-normal m-0">Total price</label>
-                <div id="totalPrice" class="text-large"><strong>$0.00</strong></div>
+                <label class="text-muted font-weight-normal m-0">合計</label>
+                <div id="totalPrice" class="text-large"><strong>$0</strong></div>
             </div>
         </div>
 
         <div class="float-right">
-            <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
-            <button type="button" class="btn btn-lg btn-primary mt-2">結帳</button>
+
+            <button type="button" class="button large expanded">結帳</button>
         </div>
 
     </div>
 </div>
+
 <footer>
     <div th:insert="/fragments/fragments.html :: footer"></div>
 </footer>
