@@ -1,127 +1,145 @@
-    <!DOCTYPE html>
-<html class="no-js" lang="en"xmlns="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SMOOTHTIX | 演唱會門票你最好的選擇!~</title>
+
     <link href="/CSS/shopping-cart.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
-
+    <style>
+        img.concert-image {
+            max-width: 75px; /* 限制最大寬度為100像素 */
+            max-height: 75px; /* 限制最大高度為100像素 */
+            width: auto; /* 讓圖片按照比例縮放 */
+            height: auto; /* 讓圖片按照比例縮放 */
+        }
+    </style>
 </head>
+<script>
+    $(document).ready(function() {
+
+        // 從 sessionStorage 中獲取數據
+        var ticketInfo = {
+            concertName: sessionStorage.getItem('concertName'),
+            concertImage : sessionStorage.getItem('concertImage'),
+            dateandlocation : sessionStorage.getItem('dateandlocation'),
+            price : parseFloat(sessionStorage.getItem('price')),
+            quantity : parseInt(sessionStorage.getItem('quantity')),
+            payment : sessionStorage.getItem('payment'),
+            collection : sessionStorage.getItem('collection'),
+
+        };
+
+        // 在這裡你可以使用這些變量執行你的邏輯，例如填充購物車表格等
+        console.log('Ticket Info', ticketInfo);
+
+
+        // 將數據填充到購物車表格
+        var cartTableBody = $('#cartBody');
+        var totalPrice = 0;
+
+        // 假設只有一個產品，你可以根據實際情況擴展這個邏輯
+        var productTotalPrice = ticketInfo.price * ticketInfo.quantity;
+        totalPrice += productTotalPrice;
+
+        var newRow = '<tr>' +
+            '<td class="text-center">' + '<img src="' + ticketInfo.concertImage + '" alt="' + ticketInfo.concertName + '" class="concert-image">' + ticketInfo.concertName + '<br>' + ticketInfo.dateandlocation + '</td>' +
+            '<td class="text-center">' + ticketInfo.collection + '</td>' +
+            '<td class="text-right">' + ticketInfo.price + '</td>' +
+            '<td class="text-center">' + ticketInfo.quantity + '</td>' +
+            '<td class="text-right">' + productTotalPrice.toFixed(0) + '</td>' +
+            '<td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>' +
+            '</tr>';
+
+        cartTableBody.append(newRow);
+        // 更新總價格
+        $('#totalPrice strong').text('$' + totalPrice.toFixed(0));
+
+        // 添加點擊事件處理程序
+        $('#checkoutButton').on('click', function() {
+            // 在此處將購物車數據發送到後端
+            $.ajax({
+                url: '/shopping/checkout',  // 您的後端處理結帳的URL
+                method: 'POST',     // 使用POST方法，以將數據發送到後端
+                contentType: 'application/json',
+                data: JSON.stringify(ticketInfo),
+                success: function(response) {
+                    // 如果結帳成功，顯示成功消息，然後重定向到首頁
+                    alert('您已結帳完成, 請按下確定後回到首頁');
+                    window.location.href = '/';
+                },
+                error: function(error) {
+                    // 處理錯誤情況，例如顯示錯誤消息
+                    console.error('Error during checkout:', error);
+                }
+            });
+        });
+    });
+</script>
+
+
 <body>
 
-<div th:insert="/fragments/fragments.html :: header"></div>
+<div th:insert="fragments/fragments.html :: header"></div>
 
 <div class="container px-3 my-5 clearfix">
     <!-- Shopping cart table -->
     <div class="card">
         <div class="card-header">
-            <h2>購物車</h2>
+            <h2 class="text-center py-3 px-4">訂票明細</h2>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered m-0">
+                <table id="cartTable" class="table table-bordered m-0">
                     <thead>
                     <tr>
                         <!-- Set columns width -->
-                        <th class="text-center py-3 px-4" style="min-width: 400px;">產品名稱 &amp; 產品明細</th>
-                        <th class="text-right py-3 px-4" style="width: 100px;">價格</th>
-                        <th class="text-center py-3 px-4" style="width: 120px;">數量</th>
-                        <th class="text-right py-3 px-4" style="width: 100px;">加總價格</th>
-                        <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                        <th class="text-center py-3 px-4" style="min-width: 200px;">場次/地點</th>
+                        <th class="text-center py-3 px-4" style="width: 200px;">取貨方式</th>
+                        <th class="text-center py-3 px-4" style="width: 100px;">價格</th>
+                        <th class="text-center py-3 px-4" style="width: 100px;">數量</th>
+                        <th class="text-center py-3 px-4" style="width: 120px;">加總價格</th>
+                        <th class="text-center align-middle px-0">移除</th>
                     </tr>
                     </thead>
-                    <tbody>
-
-                    <tr>
-                        <td class="p-4">
-                            <div class="media align-items-center">
-                                <img src="/images/示意圖1.jpg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                <div class="media-body">
-                                    <a href="#" class="d-block text-dark">搖滾巨星，來自英國的鬍子大叔!</a>
-                                    <small>
-                                        <span class="text-muted"></span>
-                                        <span class="text-muted"> </span>
-                                        <span class="text-muted"></span>
-                                    </small>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-right font-weight-semibold align-middle p-4">$57.55</td>
-                        <td class="align-middle p-4"><input type="text" class="form-control text-center" value="2"></td>
-                        <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                        <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="p-4">
-                            <div class="media align-items-center">
-                                <img src="/images/示意圖2.jpg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                <div class="media-body">
-                                    <a href="#" class="d-block text-dark">抒情情歌王子，叼菸的猴子~</a>
-                                    <small>
-                                        <span class="text-muted"></span>
-                                        <span class="text-muted"> </span>
-                                        <span class="text-muted"></span>
-                                    </small>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                        <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                        <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                        <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="p-4">
-                            <div class="media align-items-center">
-                                <img src="/images/示意圖3.jpg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                <div class="media-body">
-                                    <a href="#" class="d-block text-dark">鄉村吉他手，鄉村抒情小調~</a>
-                                    <small>
-                                        <span class="text-muted"></span>
-                                        <span class="text-muted"> </span>
-                                        <span class="text-muted"></span>
-                                    </small>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                        <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                        <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                        <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                    </tr>
-
+                    <tbody id="cartBody">
+                    <!-- Cart items will be dynamically added here -->
                     </tbody>
                 </table>
             </div>
             <!-- / Shopping cart table -->
 
             <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                <div class="d-flex ml-auto">
-                        <div class="text-right mt-4 ">
-                            <label class="text-muted font-weight-normal m-0" style="font-size: 1.5em;">Total price</label>
-                            <div class="text-large" style="font-size: 1.2em;"><strong>$1164.65</strong></div>
-                        </div>
-                </div>
-            </div>
 
-            <div class="float-right">
-                <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3"  onclick="window.location.href='http://localhost:8080/'">Back to shopping</button>
-                <button type="button" class="btn btn-lg btn-primary mt-2">結帳</button>
             </div>
+            <div class="d-flex">
 
+            </div>
+            <div class="text-right mt-4">
+                <label class="text-muted font-weight-normal m-0">合計</label>
+                <div id="totalPrice" class="text-large"><strong>$0</strong></div>
+            </div>
         </div>
+
+        <div class="float-right">
+
+            <button id="checkoutButton" type="button" class="button large expanded">結帳</button>
+        </div>
+
     </div>
 </div>
 
 <footer>
-    <div th:insert="/fragments/fragments.html :: footer"></div>
+    <div th:insert="fragments/fragments.html :: footer"></div>
 </footer>
 </body>
+
 </html>

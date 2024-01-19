@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en"xmlns="http://www.thymeleaf.org">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,7 @@
 <body>
 
 
-<div th:insert="/fragments/fragments.html :: header"></div>
+<div th:insert="fragments/fragments.html :: header"></div>
 
 <ul>
   <li> </li>
@@ -29,54 +29,54 @@
 
     <p>購買票券，讓這位音樂猴子帶領你進入他獨特的音樂世界。在音符的陪伴下，感受愛情的深度，漫遊在他的音樂迷宮中，讓心靈在旋律中激盪，一場奇幻的音樂之旅即將展開。</p>
 
-    <label>場次/地點
-      <select>
-        <option value="one">1/13台北兩廳院</option>
-        <option value="two">1/13台中歌劇院</option>
-        <option value="three">1/13高雄衛武營</option>
-        <option value="four">1/20台北兩廳院</option>
-        <option value="five">1/20台中歌劇院</option>
-        <option value="six">1/20高雄衛武營</option>
+    <form id="addToCartForm" method="post" action="/shopping/addToCart">
+      <label for="dateandlocation">場次/地點</label>
+      <select id="dateandlocation" name="dateandlocation" data-dateandlocation="value">
+        <option value="1/13台北兩廳院">1/13台北兩廳院</option>
+        <option value="1/13台中歌劇院">1/13台中歌劇院</option>
+        <option value="1/13高雄衛武營">1/13高雄衛武營</option>
+        <option value="1/20台北兩廳院">1/20台北兩廳院</option>
+        <option value="1/20台中歌劇院">1/20台中歌劇院</option>
+        <option value="1/20高雄衛武營">1/20高雄衛武營</option>
       </select>
-    </label>
 
-    <label>票種
-      <select>
-        <option value="first">敬老票</option>
-        <option value="second">學生票</option>
-        <option value="third">全票</option>
-
+      <label for="price">價格</label>
+      <select id="price" name="price" data-price="value">
+        <option value="400">NT$400</option>
+        <option value="500">NT$500</option>
+        <option value="600">NT$600</option>
       </select>
-    </label>
 
-    <div class="row">
-      <div class="small-3 columns">
-        <label for="middle-label" class="middle">數量</label>
-      </div>
-      <div class="small-9 columns">
-        <input type="text" id="middle-label" placeholder="請輸入數量">
-      </div>
-    </div>
+      <label for="quantity">數量
+        <select id="quantity" name="quantity" data-quantity="value">
+          <option value="1">1張</option>
+          <option value="2">2張</option>
+          <option value="3">3張</option>
+          <option value="4">4張</option>
+          <option value="5">5張</option>
+          <option value="6">6張</option>
+        </select>
+      </label>
 
-    <label>支付方式
-      <select>
-        <option value="first">信用卡</option>
-        <option value="second">超商付款</option>
-        <option value="third">轉帳</option>
 
-      </select>
-    </label>
+      <label for="payment">支付方式
+        <select id="payment" name="payment" data-payment="value">
+          <option value="信用卡">信用卡</option>
+          <option value="超商付款">超商付款</option>
+          <option value="轉帳">轉帳</option>
+        </select>
+      </label>
 
-    <label>取票方式
-      <select>
-        <option value="first">超商取票</option>
-        <option value="second">現場取票</option>
-        <option value="third">電子票券</option>
+      <label for="collection">取票方式
+        <select id="collection" name="collection" data-collection="value">
+          <option value="超商取票">超商取票</option>
+          <option value="現場取票">現場取票</option>
+          <option value="電子票券">電子票券</option>
+        </select>
+      </label>
 
-      </select>
-    </label>
-
-    <a href="#" class="button large expanded">加入購物車</a>
+    <input type="submit" value="加入購物車" class="button large expanded">
+    </form>
 
     <div class="small secondary expanded button-group">
 
@@ -91,7 +91,7 @@
 <ul>
   <li> </li>
 </ul>
-<a href="http://localhost:8080/concert-page/first">
+<a href="/concert-page/first">
   <div class="media-object stack-for-small">
     <div class="media-object-section">
       <img class="thumbnail" src="/images/示意圖1.jpg">
@@ -102,7 +102,7 @@
     </div>
   </div>
 </a>
-<a href="http://localhost:8080/concert-page/third">
+<a href="/concert-page/third">
   <div class="media-object stack-for-small">
     <div class="media-object-section">
       <img class="thumbnail" src="/images/示意圖3.jpg">
@@ -116,7 +116,7 @@
 
 
 <footer>
-  <div th:insert="/fragments/fragments.html :: footer"></div>
+  <div th:insert="fragments/fragments.html :: footer"></div>
 </footer>
 
 <style>
@@ -138,7 +138,48 @@
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 <script>
-  $(document).foundation();
+  $(document).ready(function() {
+    $("#addToCartForm").submit(function(event) {
+      event.preventDefault(); // 阻止表單默認提交
+
+      // 序列化表單數據
+      var formData = $(this).serialize();
+
+      var dateandlocation = $('#dateandlocation').val();
+      var price = $('#price').val();
+      var quantity = $('#quantity').val();
+      var payment = $('#payment').val();
+      var collection = $('#collection').val();
+
+      // 獲取演唱會名稱和圖片，這裡假設你已經有相應的變數或者函數可以獲取它們
+      var concertName = "抒情情歌王子，叼菸的猴子~";  // 替換為實際獲取演唱會名稱的代碼
+      var concertImage = "/images/示意圖2.jpg";  // 替換為實際獲取演唱會圖片的代碼
+
+      sessionStorage.setItem('concertName', concertName);
+      sessionStorage.setItem('concertImage', concertImage);
+      sessionStorage.setItem('dateandlocation', dateandlocation);
+      sessionStorage.setItem('price', price);
+      sessionStorage.setItem('quantity', quantity);
+      sessionStorage.setItem('payment', payment);
+      sessionStorage.setItem('collection', collection);
+
+      // 執行AJAX請求
+      $.ajax({
+        type: "POST",
+        url: "/shopping/addToCart",
+        data: formData,
+        success: function() {
+          // 處理成功後，跳轉購物車頁面
+          window.location.href = "/shopping/cart";
+        },
+        error: function(error) {
+          console.error("Error:", error);
+        }
+      })
+    });
+  });
+  // 將數據存儲到 sessionStorage
+
 </script>
 </body>
 </html>
