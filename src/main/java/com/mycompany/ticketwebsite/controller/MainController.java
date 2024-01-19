@@ -96,4 +96,6 @@ public class MainController {
         return "complete-reg";
     }
 
+    @GetMapping("/agreement")
+    public String agreement() {return "agreement";}
 }
