@@ -24,6 +24,7 @@
 </head>
 <script>
     $(document).ready(function() {
+
         // 從 sessionStorage 中獲取數據
         var ticketInfo = {
             concertName: sessionStorage.getItem('concertName'),
@@ -32,11 +33,13 @@
             price : parseFloat(sessionStorage.getItem('price')),
             quantity : parseInt(sessionStorage.getItem('quantity')),
             payment : sessionStorage.getItem('payment'),
-            collection : sessionStorage.getItem('collection')
+            collection : sessionStorage.getItem('collection'),
+
         };
 
         // 在這裡你可以使用這些變量執行你的邏輯，例如填充購物車表格等
         console.log('Ticket Info', ticketInfo);
+
 
         // 將數據填充到購物車表格
         var cartTableBody = $('#cartBody');
@@ -68,8 +71,9 @@
                 contentType: 'application/json',
                 data: JSON.stringify(ticketInfo),
                 success: function(response) {
-                    // 如果結帳成功，可以執行相應的操作，例如顯示成功消息、重定向等
-                    console.log('Checkout successful!', response);
+                    // 如果結帳成功，顯示成功消息，然後重定向到首頁
+                    alert('您已結帳完成, 請按下確定後回到首頁');
+                    window.location.href = '/';
                 },
                 error: function(error) {
                     // 處理錯誤情況，例如顯示錯誤消息
@@ -83,7 +87,7 @@
 
 <body>
 
-<div th:insert="/fragments/fragments.html :: header"></div>
+<div th:insert="fragments/fragments.html :: header"></div>
 
 <div class="container px-3 my-5 clearfix">
     <!-- Shopping cart table -->
@@ -133,7 +137,7 @@
 </div>
 
 <footer>
-    <div th:insert="/fragments/fragments.html :: footer"></div>
+    <div th:insert="fragments/fragments.html :: footer"></div>
 </footer>
 </body>
 

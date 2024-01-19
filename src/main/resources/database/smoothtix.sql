@@ -31,13 +31,15 @@ CREATE TABLE IF NOT EXISTS `2dateandlocation` (
 -- 傾印  資料表 smoothtix.ticketinfo 結構
 CREATE TABLE IF NOT EXISTS `ticketinfo` (
   `infoid` int(11) NOT NULL AUTO_INCREMENT,
+  `concertName` varchar(50) NOT NULL,
   `dateandlocation` varchar(50) NOT NULL DEFAULT '',
   `price` varchar(50) NOT NULL DEFAULT '',
+  `quantity` int(10) NOT NULL,
   `payment` varchar(50) NOT NULL DEFAULT '',
   `collection` varchar(50) NOT NULL DEFAULT '',
-  `userid` varchar(50) NOT NULL DEFAULT '',
+  `userid` varchar(50) DEFAULT '',
   PRIMARY KEY (`infoid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 取消選取資料匯出。
 

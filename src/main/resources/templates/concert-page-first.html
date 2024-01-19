@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div th:insert="/fragments/fragments.html :: header"></div>
+<div th:insert="fragments/fragments.html :: header"></div>
 
 <ul>
   <li> </li>
@@ -114,7 +114,7 @@
 </a>
 
 <footer>
-  <div th:insert="/fragments/fragments.html :: footer"></div>
+  <div th:insert="fragments/fragments.html :: footer"></div>
 </footer>
 
 <style>
@@ -138,6 +138,7 @@
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 <script>
   $(document).ready(function() {
+
     $("#addToCartForm").submit(function(event) {
       event.preventDefault(); // 阻止表單默認提交
 
@@ -154,6 +155,7 @@
       var concertName = "搖滾巨星，來自英國的鬍子大叔";  // 替換為實際獲取演唱會名稱的代碼
       var concertImage = "/images/示意圖1.jpg";  // 替換為實際獲取演唱會圖片的代碼
 
+
       sessionStorage.setItem('concertName', concertName);
       sessionStorage.setItem('concertImage', concertImage);
       sessionStorage.setItem('dateandlocation', dateandlocation);
@@ -161,6 +163,7 @@
       sessionStorage.setItem('quantity', quantity);
       sessionStorage.setItem('payment', payment);
       sessionStorage.setItem('collection', collection);
+
 
       // 執行AJAX請求
       $.ajax({
