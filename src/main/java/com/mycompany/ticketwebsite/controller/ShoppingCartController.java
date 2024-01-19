@@ -2,6 +2,7 @@ package com.mycompany.ticketwebsite.controller;
 
 import com.mycompany.ticketwebsite.model.ShoppingCart;
 import com.mycompany.ticketwebsite.model.TicketInfoModel;
+import com.mycompany.ticketwebsite.model.UserRegModel;
 import com.mycompany.ticketwebsite.service.ShoppingCartService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class ShoppingCartController {
 
     @GetMapping("/cart")
     public String viewCart(Model model, HttpSession session) {
+        model.addAttribute("usermodel", new UserRegModel());
+        // 從會話獲取user資料
+        UserRegModel user = (UserRegModel) session.getAttribute("user");
+
+        // 將用戶訊息傳給前端
+        model.addAttribute("user", user);
+
         ShoppingCart cart = shoppingCartService.getOrCreateShoppingCart(session);
         model.addAttribute("cart", cart);
         return "shopping-cart";
