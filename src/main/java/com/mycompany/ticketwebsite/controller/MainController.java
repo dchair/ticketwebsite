@@ -23,34 +23,55 @@ public class MainController {
 
     @GetMapping("/concert-page/first")
     public String concertPageA(Model model, HttpSession session) {
+        model.addAttribute("usermodel", new UserRegModel());
         // 從會話獲取user資料
         UserRegModel user = (UserRegModel) session.getAttribute("user");
 
         // 將用戶訊息傳給前端
         model.addAttribute("user", user);
-
-        // 返回首頁
+        if (user != null)
+        {
         return "concert-page-first";
+    }
+        else
+        {
+        return "redirect:/alert-page";}
     }
 
     @GetMapping("/concert-page/second")
     public String concertPageB(Model model, HttpSession session) {
+        model.addAttribute("usermodel", new UserRegModel());
         // 從會話獲取user資料
         UserRegModel user = (UserRegModel) session.getAttribute("user");
 
         // 將用戶訊息傳給前端
         model.addAttribute("user", user);
-        return "concert-page-second";
+        if (user != null)
+        {
+            return "concert-page-second";
+        }
+        else
+        {
+            return "redirect:/alert-page";}
     }
+
 
     @GetMapping("/concert-page/third")
     public String concertPageC(Model model, HttpSession session) {
+
+        model.addAttribute("usermodel", new UserRegModel());
         // 從會話獲取user資料
         UserRegModel user = (UserRegModel) session.getAttribute("user");
 
         // 將用戶訊息傳給前端
         model.addAttribute("user", user);
-        return "concert-page-third";
+        if (user != null)
+        {
+            return "concert-page-third";
+        }
+        else
+        {
+            return "redirect:/alert-page";}
     }
 
 
