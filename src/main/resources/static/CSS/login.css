@@ -110,12 +110,12 @@ img {
 
 /*-- end reset --*/
 body {
-    background: #33D7FF;
+    background: #CCE9FC;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #33D7FF, #33D7FF);
-    background: -moz-linear-gradient(to top, #33D7FF, #33D7FF);
-    background: -o-linear-gradient(to top, #33D7FF, #33D7FF);
-    background: linear-gradient(to top, #33D7FF, #33D7FF);
+    background: -webkit-linear-gradient(to top, #CCE9FC, #CCE9FC);
+    background: -moz-linear-gradient(to top, #CCE9FC, #CCE9FC);
+    background: -o-linear-gradient(to top, #CCE9FC, #CCE9FC);
+    background: linear-gradient(to top, #CCE9FC, #CCE9FC);
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
@@ -210,9 +210,9 @@ input.email, input.text.w3lpass {
 input[type="submit"] {
     font-size: .9em;
     color: #fff;
-    background: #33D7FF;
+    background: #CCE9FC;
     outline: none;
-    border: 1px solid #33D7FF;
+    border: 1px solid #CCE9FC;
     cursor: pointer;
     padding: 0.9em;
     -webkit-appearance: none;
@@ -227,7 +227,7 @@ input[type="submit"]:hover {
     -o-transition: .5s all;
     -ms-transition: .5s all;
     transition: .5s all;
-    background: #33D7FF;
+    background: #CCE9FC;
 }
 
 .agileits-top p {
@@ -247,7 +247,7 @@ input[type="submit"]:hover {
 }
 
 .agileits-top p a:hover {
-    color: #33D7FF;
+    color: #CCE9FC;
 }
 
 /*-- //main --*/
@@ -261,7 +261,7 @@ input[type="submit"]:hover {
 }
 
 input.checkbox {
-    background: #33D7FF;
+    background: #CCE9FC;
     cursor: pointer;
     width: 1.2em;
     height: 1.2em;

@@ -45,4 +45,8 @@ public class LoginController {
 
         return response;
     }
+    @GetMapping("/alert-page")
+    public String alertPage() {
+        return "alert-page"; // 返回 alert-page.html
+    }
 }

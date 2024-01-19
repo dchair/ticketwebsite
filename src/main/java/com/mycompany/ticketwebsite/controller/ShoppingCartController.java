@@ -1,64 +1,80 @@
 package com.mycompany.ticketwebsite.controller;
 
 import com.mycompany.ticketwebsite.model.ShoppingCart;
+import com.mycompany.ticketwebsite.model.TicketInfoModel;
+import com.mycompany.ticketwebsite.model.UserRegModel;
 import com.mycompany.ticketwebsite.service.ShoppingCartService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Map;
+
+@CrossOrigin(origins = "*")
 @Controller
 @RequestMapping("/shopping")
 public class ShoppingCartController {
+
     @Autowired
     private ShoppingCartService shoppingCartService;
 
-    @GetMapping("/checkout")
-    public String checkout(HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart != null) {
-            shoppingCartService.checkout(cart);
-            session.removeAttribute("cart");
-        }
+    @PostMapping("/checkout")
+    public String checkout(@RequestBody TicketInfoModel ticketInfo, HttpSession session) {
+        System.out.println("Received checkout request for ticket: " + ticketInfo);
 
-        return "complete-purchase"; // 這個方法會檢查 Session 中的購物車，並調用@service完成結帳操作。
+        shoppingCartService.saveCartToDatebase(ticketInfo);
+        session.setAttribute("checkoutInfo", ticketInfo);
+        System.out.println("Checkout completed successfully.");
+
+        return "complete-purchase";
     }
+
 
     @GetMapping("/cart")
     public String viewCart(Model model, HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
-        }
+        model.addAttribute("usermodel", new UserRegModel());
+        // 從會話獲取user資料
+        UserRegModel user = (UserRegModel) session.getAttribute("user");
+
+        // 將用戶訊息傳給前端
+        model.addAttribute("user", user);
+
+        ShoppingCart cart = shoppingCartService.getOrCreateShoppingCart(session);
         model.addAttribute("cart", cart);
         return "shopping-cart";
-        //  當用戶訪問購物車頁面時，這個方法會檢查 Session 中的購物車，如果不存在則創建一個新的購物車。
     }
-    @PostMapping("/addToCart")
-    public String addToCart(@RequestParam String productId, @RequestParam int quantity, HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
-        }
-        shoppingCartService.addToCart(cart, productId, quantity);
-        return "redirect:/shopping-cart";
-        // 當用戶提交添加商品到購物車的表單時，這個方法會從 Session 中獲取購物車，如果不存在則創建一個新的購物車。然後調用@Service將商品添加到購物車
-        // 最後，通過重定向(刷新當前頁面)重新導向到購物車頁面。
 
+    @ModelAttribute("ticketModel")
+    public TicketInfoModel getTicketModel() {
+        return new TicketInfoModel();
     }
+
+
+    @PostMapping("/addToCart")
+    public String addToCart(@ModelAttribute("ticketModel") TicketInfoModel ticketModel,
+                            RedirectAttributes redirectAttributes, HttpSession session) {
+        shoppingCartService.addToCart(
+                ticketModel.getDateandlocation(),
+                ticketModel.getPrice(),
+                ticketModel.getPayment(),
+                ticketModel.getCollection(),
+                ticketModel.getQuantity()
+        );
+
+        ShoppingCart cart = shoppingCartService.getOrCreateShoppingCart(session);
+        redirectAttributes.addFlashAttribute("successMessage", "成功将商品添加到购物车！");
+        return "redirect:/shopping/cart";
+    }
+
     @PostMapping("/removeFromCart")
-    public String removeFromCart(@RequestParam String productId, @RequestParam int quantity, HttpSession session) {
+    public String removeFromCart(@RequestParam String dateandlocation, HttpSession session) {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart != null) {
-            shoppingCartService.removeFromCart(cart, productId, quantity);
+            shoppingCartService.removeFromCart(cart, dateandlocation);
         }
-        return "redirect:/shopping-cart"; // 重新導向購物車頁面
+        return "redirect:/shopping/cart";
     }
-    // 當用戶提交從購物車移除商品的表單時，這個方法會從 Session 中獲取購物車，如果存在則調用
 }
