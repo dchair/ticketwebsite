@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SMOOTHTIX | 演唱會門票你最好的選擇!~</title>
 
     <link href="/CSS/shopping-cart.css" rel="stylesheet" type="text/css" media="all" />
@@ -23,7 +22,7 @@
         }
     </style>
 </head>
-<script>
+<script th:inline="javascript">
     $(document).ready(function() {
 
         // 從 sessionStorage 中獲取數據
@@ -35,6 +34,7 @@
             quantity : parseInt(sessionStorage.getItem('quantity')),
             payment : sessionStorage.getItem('payment'),
             collection : sessionStorage.getItem('collection'),
+            userid: /*[[${session.user.username}]]*/ 'default_value',
 
         };
 
@@ -71,7 +71,7 @@
                 method: 'POST',     // 使用POST方法，以將數據發送到後端
                 contentType: 'application/json',
                 data: JSON.stringify(ticketInfo),
-                success: function(response) {
+                success: function() {
                     // 如果結帳成功，顯示成功消息，然後重定向到首頁
                     alert('您已結帳完成, 請按下確定後回到首頁');
                     window.location.href = '/';
