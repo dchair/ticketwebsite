@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>OrderList</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Custom Theme files -->
+    <link href="/CSS/order-list.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
 </head>
 <body>
-
+<section>
+    <!--for demo wrap-->
+    <h1>訂單</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>演唱會</th>
+                <th>唱次/地點</th>
+                <th>價格</th>
+                <th>數量</th>
+                <th>支付方式</th>
+                <th>取票方式</th>
+                <th>ID</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr th:each="order  : ${orders }">
+                <td th:text="${order.getConcertName()}">演唱會</td>
+                <td th:text="${order.getDateandlocation()}">唱次/地點</td>
+                <td th:text="${order.getPrice()}">價格</td>
+                <td th:text="${order.getQuantity()}">數量</td>
+                <td th:text="${order.getPayment()}">支付方式</td>
+                <td th:text="${order.getCollection()}">取票方式</td>
+                <td th:text="${order.getUserid()}">ID</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="/JavaScript/order-list.js"></script>
+</section>
 </body>
 </html>

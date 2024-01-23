@@ -1,6 +1,7 @@
 package com.mycompany.ticketwebsite.controller;
 
 import com.mycompany.ticketwebsite.DAO.TicketDao;
+import com.mycompany.ticketwebsite.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class OrderController {
     @Autowired
     TicketDao ticketDao;
-    @GetMapping("order-list")
+    @GetMapping("/order_all")
         public String orderList(Model model){
-        model.addAttribute("order", ticketDao.getTicketInfoModelAll());
+        model.addAttribute("orders", ticketDao.getTicketInfoModelAll());
         return "order-list";
     }
 }
