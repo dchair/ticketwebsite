@@ -1,7 +1,6 @@
 package com.mycompany.ticketwebsite.controller;
 
 import com.mycompany.ticketwebsite.DAO.TicketDao;
-import com.mycompany.ticketwebsite.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
